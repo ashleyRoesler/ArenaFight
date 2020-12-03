@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public CharacterController controller;      // player controller reference
     public Transform cam;                       // camera reference
+    public Animator anim;                       // animator reference
 
     public float speed = 6f;                    // player speed
 
@@ -13,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*===================================================
+                             MOVEMENT
+        ===================================================*/
+
         // gather input information
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
@@ -20,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
+            // set animation to running
+            anim.SetBool("IsRunning", true);
+
             // rotate player to make them look where they are going (based on camera rotation as well)
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -28,6 +36,11 @@ public class PlayerMovement : MonoBehaviour
             // move player based on input and camera rotation
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
+        }
+        else
+        {
+            // set animation to idle
+            anim.SetBool("IsRunning", false);
         }
     }
 }
