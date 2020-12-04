@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [Header("References")]
     public CharacterController controller;      // player controller reference
@@ -14,10 +14,12 @@ public class PlayerMovement : MonoBehaviour
     float turnSmoothVelocity;                   // current smooth velocity
 
     [Header("Player Health")]
-    public int maxHealth = 100;         // player's maximum amount of health
-    int currentHealth;                  // player's current health
+    public int maxHealth = 100;                 // player's maximum amount of health
+    int currentHealth;                          // player's current health
 
-    bool isDead = false;                // true if current health reaches 0
+    public bool isDead = false;                 // true if current health reaches 0
+
+    public bool isActive;
 
     // Start is called before the first frame update
     void Start()
@@ -28,14 +30,20 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentHealth == 0 && !isDead)
+        // test health
+        if (!isActive)
         {
-            isDead = true;
-            anim.SetBool("IsDead", true);
-        }
-        else
-        {
-            currentHealth--;
+            if (currentHealth == 0 && !isDead)
+            {
+                isDead = true;
+                anim.SetBool("IsDead", true);
+                enabled = false;
+            }
+            else
+            {
+                //currentHealth--;
+            }
+            return;
         }
 
         // gather movement input information
@@ -43,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (direction.magnitude >= 0.1f && !isDead)
+        if (direction.magnitude >= 0.1f)
         {
             // set animation to running
             anim.SetBool("IsRunning", true);
@@ -57,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
-        else if (direction.magnitude < 0.1f && !isDead)
+        else
         {
             // set animation to idle
             anim.SetBool("IsRunning", false);
