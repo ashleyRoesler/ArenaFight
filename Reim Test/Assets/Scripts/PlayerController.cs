@@ -9,13 +9,16 @@ public class PlayerController : MonoBehaviour
     public HealthBar healthBar;                 // health bar reference
 
     [Header("Player Movement")]
-    public float speed = 6f;                    // player speed
+    [SerializeField]
+    float speed = 6f;                           // player speed
 
-    public float turnSmoothTime = 0.1f;         // smooths player rotation
+    [SerializeField]
+    float turnSmoothTime = 0.1f;                // smooths player rotation
     float turnSmoothVelocity;                   // current smooth velocity
 
     [Header("Player Health")]
-    public int maxHealth = 100;                 // player's maximum amount of health
+    [SerializeField]
+    int maxHealth = 100;                        // player's maximum amount of health
     int currentHealth;                          // player's current health
 
     public bool isDead = false;                 // true if current health reaches 0

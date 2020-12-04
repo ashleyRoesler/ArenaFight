@@ -2,7 +2,8 @@
 
 public class Billboard : MonoBehaviour
 {
-    public Transform cam;           // reference to camera
+    [SerializeField]
+    Transform cam;           // reference to camera
 
     void LateUpdate()
     {
