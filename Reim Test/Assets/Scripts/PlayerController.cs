@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     public CharacterController controller;      // player controller reference
     public Transform cam;                       // camera reference
     public Animator anim;                       // animator reference
+    public HealthBar healthBar;                 // health bar reference
 
     [Header("Player Movement")]
     public float speed = 6f;                    // player speed
@@ -25,26 +26,33 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*=====================================================
+                               HEALTH
+        =====================================================*/
+
         // test health
-        if (!isActive)
+        if (!isActive && !isDead)
         {
-            if (currentHealth == 0 && !isDead)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                isDead = true;
-                anim.SetBool("IsDead", true);
-                enabled = false;
+                TakeDamage(10);
             }
-            else
-            {
-                //currentHealth--;
-            }
+        }
+
+        if (!isActive || isDead)
+        {
             return;
         }
+
+        /*=====================================================
+                              MOVEMENT
+        =====================================================*/
 
         // gather movement input information
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -69,6 +77,24 @@ public class PlayerController : MonoBehaviour
         {
             // set animation to idle
             anim.SetBool("IsRunning", false);
+        }
+    }
+
+    void TakeDamage(int damage)
+    {
+        // decrease health
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+
+        // die (play animation and turn off script)
+        if (currentHealth <= 0)
+        {
+            isDead = true;
+            anim.SetBool("IsDead", true);
+            enabled = false;
+
+            // make health bar disappear
+            healthBar.gameObject.SetActive(false);
         }
     }
 }
