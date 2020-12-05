@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Menu : MonoBehaviour
+public class ReadyMenu : MonoBehaviour
 {
     [SerializeField]
     Button ready1;          // reference to player 1's ready button
@@ -14,6 +14,14 @@ public class Menu : MonoBehaviour
     Button ready3;          // reference to player 3's ready button
 
     int ready = 0;
+
+    public void OnEnable()
+    {
+        ready = 0;
+        ready1.interactable = true;
+        ready2.interactable = true;
+        ready3.interactable = true;
+    }
 
     public void BeReady1()
     {
