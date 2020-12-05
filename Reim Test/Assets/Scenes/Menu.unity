@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25485048, g: 0.74687004, b: 0.7830189, a: 1}
+  m_Color: {r: 0.14509805, g: 0.21176472, b: 0.2509804, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -637,7 +637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25485048, g: 0.74687004, b: 0.7830189, a: 1}
+  m_Color: {r: 0.14509805, g: 0.21176472, b: 0.2509804, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -924,7 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25485048, g: 0.74687004, b: 0.7830189, a: 1}
+  m_Color: {r: 0.14509805, g: 0.21176472, b: 0.2509804, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1054,7 +1054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25485048, g: 0.74687004, b: 0.7830189, a: 1}
+  m_Color: {r: 0.14509805, g: 0.21176472, b: 0.2509804, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1444,7 +1444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25485048, g: 0.74687004, b: 0.7830189, a: 1}
+  m_Color: {r: 0.15325737, g: 0.21944328, b: 0.26415092, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1574,7 +1574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25485048, g: 0.74687004, b: 0.7830189, a: 1}
+  m_Color: {r: 0.14509805, g: 0.21176472, b: 0.2509804, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2074,7 +2074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6065326, g: 0.8867924, b: 0.87535006, a: 1}
+  m_Color: {r: 0.06243324, g: 0.08109437, b: 0.21698111, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
