@@ -18,30 +18,32 @@ public class ArenaManager : MonoBehaviour
     void Update()
     {
         // check for win condition (one player is left standing)
-        if (!gameOver && ((!Player1.isDead && Player2.isDead && Player3.isDead) || (Player1.isDead && !Player2.isDead && Player3.isDead) || (Player1.isDead && Player2.isDead && !Player3.isDead)))
+        if (!gameOver && ((!Player1.HP.IsDead() && Player2.HP.IsDead() && Player3.HP.IsDead()) || 
+            (Player1.HP.IsDead() && !Player2.HP.IsDead() && Player3.HP.IsDead()) || 
+            (Player1.HP.IsDead() && Player2.HP.IsDead() && !Player3.HP.IsDead())))
         {
             gameOver = true;
 
             // player 1 is the winner
-            if (!Player1.isDead)
+            if (!Player1.HP.IsDead())
             {
                 // play animation and disable script
                 Player1.anim.SetBool("Winner", true);
                 Player1.enabled = false;
 
                 // make health bar disappear
-                Player1.healthBar.gameObject.SetActive(false);
+                Player1.HP.DisableHPBar();
             }
 
             // player 2 is the winner
-            else if (!Player2.isDead)
+            else if (!Player2.HP.IsDead())
             {
                 // play animation and disable script
                 Player2.anim.SetBool("Winner", true);
                 Player2.enabled = false;
 
                 // make health bar disappear
-                Player2.healthBar.gameObject.SetActive(false);
+                Player2.HP.DisableHPBar();
             }
 
             // player 3 is the winner
@@ -52,7 +54,7 @@ public class ArenaManager : MonoBehaviour
                 Player3.enabled = false;
 
                 // make health bar disappear
-                Player3.healthBar.gameObject.SetActive(false);
+                Player3.HP.DisableHPBar();
             }
         }
     }

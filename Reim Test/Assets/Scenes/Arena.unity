@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 90341116}
   - component: {fileID: 90341115}
   - component: {fileID: 90341114}
+  - component: {fileID: 90341117}
   m_Layer: 9
   m_Name: Player 1
   m_TagString: Untagged
@@ -264,11 +265,9 @@ MonoBehaviour:
   controller: {fileID: 90341113}
   cam: {fileID: 963194228}
   anim: {fileID: 2034608784}
-  healthBar: {fileID: 2092614905}
   speed: 6
   turnSmoothTime: 0.1
-  maxHealth: 100
-  isDead: 0
+  HP: {fileID: 90341117}
   isActive: 1
 --- !u!54 &90341115
 Rigidbody:
@@ -300,6 +299,21 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &90341117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90341111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82d12d95cfc54a4bbaf9b4589aad240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 2092614905}
+  player: {fileID: 90341114}
+  maxHealth: 100
 --- !u!1 &158462044
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +454,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340359039}
-  m_LocalRotation: {x: 0.15487324, y: 0.000000018196621, z: -0.000000002852588, w: 0.98793435}
+  m_LocalRotation: {x: 0.15487325, y: 0.000000010406595, z: -0.0000000016313869, w: 0.98793435}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2001,6 +2015,7 @@ GameObject:
   - component: {fileID: 1371588942}
   - component: {fileID: 1371588941}
   - component: {fileID: 1371588944}
+  - component: {fileID: 1371588945}
   m_Layer: 9
   m_Name: Player 2
   m_TagString: Untagged
@@ -2087,12 +2102,25 @@ MonoBehaviour:
   controller: {fileID: 1371588943}
   cam: {fileID: 963194228}
   anim: {fileID: 1068887672}
-  healthBar: {fileID: 764043959}
   speed: 6
   turnSmoothTime: 0.1
-  maxHealth: 100
-  isDead: 0
+  HP: {fileID: 1371588945}
   isActive: 0
+--- !u!114 &1371588945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371588939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82d12d95cfc54a4bbaf9b4589aad240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 764043959}
+  player: {fileID: 1371588944}
+  maxHealth: 100
 --- !u!1 &1420233996
 GameObject:
   m_ObjectHideFlags: 0
@@ -7130,6 +7158,7 @@ GameObject:
   - component: {fileID: 1433772736}
   - component: {fileID: 1433772735}
   - component: {fileID: 1433772738}
+  - component: {fileID: 1433772739}
   m_Layer: 9
   m_Name: Player 3
   m_TagString: Untagged
@@ -7216,12 +7245,25 @@ MonoBehaviour:
   controller: {fileID: 1433772737}
   cam: {fileID: 963194228}
   anim: {fileID: 1225561448}
-  healthBar: {fileID: 1914480320}
   speed: 6
   turnSmoothTime: 0.1
-  maxHealth: 80
-  isDead: 0
+  HP: {fileID: 1433772739}
   isActive: 0
+--- !u!114 &1433772739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433772733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82d12d95cfc54a4bbaf9b4589aad240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 1914480320}
+  player: {fileID: 1433772738}
+  maxHealth: 80
 --- !u!1 &1453565254
 GameObject:
   m_ObjectHideFlags: 3
