@@ -6,7 +6,7 @@ public class ArenaManager : MonoBehaviour
     public PlayerController Player2;      // reference to player 2
     public PlayerController Player3;      // reference to player 3
 
-    bool gameOver = false;
+    private bool gameOver = false;
 
     // Start is called before the first frame update
     void Start()

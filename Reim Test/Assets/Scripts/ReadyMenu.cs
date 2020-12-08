@@ -5,15 +5,15 @@ using UnityEngine.UI;
 public class ReadyMenu : MonoBehaviour
 {
     [SerializeField]
-    Button ready1;          // reference to player 1's ready button
+    private Button ready1;          // reference to player 1's ready button
 
     [SerializeField]
-    Button ready2;          // reference to player 2's ready button
+    private Button ready2;          // reference to player 2's ready button
 
     [SerializeField]
-    Button ready3;          // reference to player 3's ready button
+    private Button ready3;          // reference to player 3's ready button
 
-    int ready = 0;
+    private int ready = 0;
 
     public void OnEnable()
     {

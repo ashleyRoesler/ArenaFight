@@ -9,40 +9,22 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player Movement")]
     [SerializeField]
-    float speed = 6f;                           // player speed
+    private float speed = 6f;                   // player speed
 
     [SerializeField]
-    float turnSmoothTime = 0.1f;                // smooths player rotation
-    float turnSmoothVelocity;                   // current smooth velocity
+    private float turnSmoothTime = 0.1f;        // smooths player rotation
+    private float turnSmoothVelocity;           // current smooth velocity
 
     [Header("Player Health")]
     public Health HP;                           // player's health information
-
     public bool isActive;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    private bool isAttacking = false;
 
     // Update is called once per frame
     void Update()
     {
-        /*=====================================================
-                               HEALTH
-        =====================================================*/
-
-        // test health
-        if (!isActive && !HP.IsDead())
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                HP.TakeDamage(10);
-            }
-        }
-
-        if (!isActive || HP.IsDead())
+        if (!isActive || isAttacking)
         {
             return;
         }
@@ -75,5 +57,10 @@ public class PlayerController : MonoBehaviour
             // set animation to idle
             anim.SetBool("IsRunning", false);
         }
+    }
+
+    public void ToggleAttack()
+    {
+        isAttacking = !isAttacking;
     }
 }

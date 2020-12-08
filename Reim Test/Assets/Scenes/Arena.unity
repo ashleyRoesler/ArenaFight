@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 90341115}
   - component: {fileID: 90341114}
   - component: {fileID: 90341117}
+  - component: {fileID: 90341118}
   m_Layer: 9
   m_Name: Player 1
   m_TagString: Untagged
@@ -314,6 +315,19 @@ MonoBehaviour:
   healthBar: {fileID: 2092614905}
   player: {fileID: 90341114}
   maxHealth: 100
+--- !u!114 &90341118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90341111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5127f0b5613efe84598ced12560ac038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 90341114}
 --- !u!1 &158462044
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,7 +468,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340359039}
-  m_LocalRotation: {x: 0.15487325, y: 0.000000010406595, z: -0.0000000016313869, w: 0.98793435}
+  m_LocalRotation: {x: 0.15487324, y: 0.00000001819662, z: -0.0000000028525875, w: 0.98793435}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -580,7 +594,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17146
+  m_Name: pb_Mesh23670
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1112,7 +1126,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.15750952, y: 0.0010673632, z: -0.00017024504, w: 0.9875169}
+  m_LocalRotation: {x: 0.15750949, y: 0.0012309746, z: -0.00019634115, w: 0.9875167}
   m_LocalPosition: {x: -17, y: 3.8, z: -5.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2016,6 +2030,7 @@ GameObject:
   - component: {fileID: 1371588941}
   - component: {fileID: 1371588944}
   - component: {fileID: 1371588945}
+  - component: {fileID: 1371588946}
   m_Layer: 9
   m_Name: Player 2
   m_TagString: Untagged
@@ -2121,6 +2136,19 @@ MonoBehaviour:
   healthBar: {fileID: 764043959}
   player: {fileID: 1371588944}
   maxHealth: 100
+--- !u!114 &1371588946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371588939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5127f0b5613efe84598ced12560ac038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1371588944}
 --- !u!1 &1420233996
 GameObject:
   m_ObjectHideFlags: 0
@@ -7159,6 +7187,7 @@ GameObject:
   - component: {fileID: 1433772735}
   - component: {fileID: 1433772738}
   - component: {fileID: 1433772739}
+  - component: {fileID: 1433772740}
   m_Layer: 9
   m_Name: Player 3
   m_TagString: Untagged
@@ -7264,6 +7293,19 @@ MonoBehaviour:
   healthBar: {fileID: 1914480320}
   player: {fileID: 1433772738}
   maxHealth: 80
+--- !u!114 &1433772740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433772733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5127f0b5613efe84598ced12560ac038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1433772738}
 --- !u!1 &1453565254
 GameObject:
   m_ObjectHideFlags: 3
@@ -10411,7 +10453,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878724140}
-  m_LocalRotation: {x: 0.15750952, y: 0.0010673631, z: -0.00017024502, w: 0.9875169}
+  m_LocalRotation: {x: 0.15750948, y: 0.0012309742, z: -0.0001963411, w: 0.9875167}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11181,7 +11223,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17200
+  m_Name: pb_Mesh23726
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

@@ -2,23 +2,43 @@
 
 public class Health : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField]
-    HealthBar healthBar;        // health bar reference
+    private PlayerController player;    // player reference
 
     [SerializeField]
-    PlayerController player;    // player reference
+    private HealthBar healthBar;        // health bar reference
 
+    [Header("Health Values")]
     [SerializeField]
-    int maxHealth = 100;        // player's maximum amount of health
-    int currentHealth;          // player's current health
+    private int maxHealth = 100;        // player's maximum amount of health
+    private int currentHealth;          // player's current health
 
-    bool dead = false;          // true if current health reaches 0
+    private bool dead = false;          // true if current health reaches 0
 
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // test health
+        if (!player.isActive && !dead)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+               TakeDamage(10);
+            }
+        }
+
+        if (!player.isActive || dead)
+        {
+            return;
+        }
     }
 
     public bool IsDead()
