@@ -8,7 +8,7 @@ public class Attack : MonoBehaviour
     [SerializeField]
     private PlayerController player;
 
-    private int attackId = 0;
+    private int attackId = 2;
 
     [Header("Attack Values")]
     [SerializeField]
