@@ -19,12 +19,14 @@ public class PlayerController : MonoBehaviour
     public Health HP;                           // player's health information
     public bool isActive;
 
-    private bool isAttacking = false;
+    [Header("Player Attack")]
+    [SerializeField]
+    private Attack attack;                      // player's attack information
 
     // Update is called once per frame
     void Update()
     {
-        if (!isActive || isAttacking)
+        if (!isActive || attack.isAttacking())
         {
             return;
         }
@@ -57,10 +59,5 @@ public class PlayerController : MonoBehaviour
             // set animation to idle
             anim.SetBool("IsRunning", false);
         }
-    }
-
-    public void ToggleAttack()
-    {
-        isAttacking = !isAttacking;
     }
 }

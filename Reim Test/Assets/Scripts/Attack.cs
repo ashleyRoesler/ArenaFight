@@ -20,14 +20,16 @@ public class Attack : MonoBehaviour
     [SerializeField]
     private int magicPower = 30;        // magic hp damage
 
+    private bool attacking = false;   // false if attack animation is not playing
+
     // Update is called once per frame
     void Update()
     {
-        if (player.isActive && Input.GetMouseButtonDown(0))
+        if (player.isActive && !attacking && Input.GetMouseButtonDown(0))
         {
             // set attacking to true
             player.anim.SetBool("Attacking", true);
-            player.ToggleAttack();
+            attacking = true;
 
             // set animation and attack type
             player.anim.SetInteger("Attack Type", attackId);
@@ -59,9 +61,17 @@ public class Attack : MonoBehaviour
             {
                 attackId = 0;
             }
-
-            // turn attacking off
-            player.ToggleAttack();
         }
+    }
+
+    void EndAttack()
+    {
+        attacking = false;
+        player.anim.SetBool("Attacking", false);
+    }
+
+    public bool isAttacking()
+    {
+        return attacking;
     }
 }
