@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
@@ -10,7 +8,7 @@ public class Attack : MonoBehaviour
 
     private int attackId = 0;
 
-    [Header("Attack Values")]
+    [Header("Damage Values")]
     [SerializeField]
     private int punchPower = 10;        // punch hp damage
 
@@ -19,6 +17,16 @@ public class Attack : MonoBehaviour
 
     [SerializeField]
     private int magicPower = 30;        // magic hp damage
+
+    [Header("Attack Speeds")]
+    [SerializeField]
+    private int punchSpeed = 1;        // punch animation speed
+
+    [SerializeField]
+    private int swordSpeed = 1;        // sword animation speed
+
+    [SerializeField]
+    private int magicSpeed = 1;        // magic animation speed
 
     private bool attacking = false;   // false if attack animation is not playing
 
