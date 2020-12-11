@@ -5,37 +5,15 @@ public class Attack : MonoBehaviour
 {
     [Header("References")]
     [SerializeField]
-    private PlayerController player;
+    private PlayerController player;    // player reference
     [SerializeField]
-    private GameObject sword;
-
-    GameObject projectile;              // magic projectile
+    private GameObject sword;           // player's sword
     [SerializeField]
     private GameObject hand;            // player's hand, used for firing projectile
 
+    private GameObject projectile;      // magic projectile
+
     private int attackId = 0;           // type of attack (punch or sword)
-
-    [Header("Damage Values")]
-    [SerializeField]
-    private int punchPower = 10;        // punch hp damage
-    [SerializeField]
-    private int swordPower = 20;        // sword hp damage
-    [SerializeField]
-    private int magicPower = 15;        // magic hp damage
-
-    public static int punchP = 10;
-    public static int swordP = 20;
-    public static int magicP = 15;
-
-    [Header("Attack Speeds")]
-    [SerializeField]
-    private float punchSpeed = 1.0f;    // punch animation speed
-    [SerializeField]
-    private float swordSpeed = 1.0f;    // sword animation speed
-    [SerializeField]
-    private float magicSpeed = 1.0f;    // magic animation speed
-    [SerializeField]
-    private float projectileSpeed = 50.0f;      // magic projectile speed
 
     private bool attacking = false;     // false if attack animation is not playing
 
@@ -44,15 +22,10 @@ public class Attack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // set static damage values
-        punchP = punchPower;
-        swordP = swordPower;
-        magicP = magicPower;
-
         // set attack speeds
-        player.anim.SetFloat("Punch Speed", punchSpeed);
-        player.anim.SetFloat("Sword Speed", swordSpeed);
-        player.anim.SetFloat("Magic Speed", magicSpeed);
+        player.anim.SetFloat("Punch Speed", Stats.punchS);
+        player.anim.SetFloat("Sword Speed", Stats.swordS);
+        player.anim.SetFloat("Magic Speed", Stats.magicS);
 
         // start with sword sheathed
         sword.SetActive(false);
@@ -145,6 +118,6 @@ public class Attack : MonoBehaviour
 
         // fire projectile
         Rigidbody rb = magic.GetComponent<Rigidbody>();
-        rb.AddForce(player.transform.forward * projectileSpeed, ForceMode.Force);
+        rb.AddForce(player.transform.forward * Stats.projectileS, ForceMode.Force);
     }
 }

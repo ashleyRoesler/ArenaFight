@@ -5,14 +5,8 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     public CharacterController controller;      // player controller reference
     public Transform cam;                       // camera reference
-    public Animator anim;                       // animator reference
+    public Animator anim;                       // animator reference        
 
-    [Header("Player Movement")]
-    [SerializeField]
-    private float speed = 6f;                   // player speed
-
-    [SerializeField]
-    private float turnSmoothTime = 0.1f;        // smooths player rotation
     private float turnSmoothVelocity;           // current smooth velocity
 
     [Header("Player Health")]
@@ -54,12 +48,12 @@ public class PlayerController : MonoBehaviour
 
             // rotate player to make them look where they are going (based on camera rotation as well)
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, Stats.sSmoothT);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             // move player based on input and camera rotation
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            controller.Move(moveDir.normalized * Stats.sSpeed * Time.deltaTime);
         }
         else
         {

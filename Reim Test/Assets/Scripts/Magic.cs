@@ -2,16 +2,18 @@
 
 public class Magic : MonoBehaviour
 {
+    private bool hasCollide = false;
+
     private void OnTriggerEnter(Collider other)
     {
         // damage player
-        if (other.gameObject.tag == "Player")
+        if (!hasCollide && other.gameObject.tag == "Player")
         {
-            // get reference to the player controller that was hit
-            PlayerController player = other.gameObject.GetComponent<PlayerController>();
+            // prevent double collisions
+            hasCollide = true;
 
-            // apply damage
-            player.HP.TakeDamage(Attack.magicP);
+            // apply damage to the player that was hit
+            other.gameObject.GetComponent<PlayerController>().HP.TakeDamage(Stats.magicP);
         }
 
         // destroy magic projectile on collision

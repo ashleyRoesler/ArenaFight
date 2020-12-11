@@ -404,8 +404,6 @@ MonoBehaviour:
   controller: {fileID: 90341113}
   cam: {fileID: 963194228}
   anim: {fileID: 90341119}
-  speed: 6
-  turnSmoothTime: 0.1
   HP: {fileID: 90341117}
   isActive: 1
   attack: {fileID: 90341118}
@@ -453,7 +451,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 90341114}
   healthBar: {fileID: 2092614905}
-  maxHealth: 100
 --- !u!114 &90341118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,13 +466,6 @@ MonoBehaviour:
   player: {fileID: 90341114}
   sword: {fileID: 10535690}
   hand: {fileID: 1384164841}
-  punchPower: 10
-  swordPower: 20
-  magicPower: 15
-  punchSpeed: 2
-  swordSpeed: 1
-  magicSpeed: 1.5
-  projectileSpeed: 8
 --- !u!95 &90341119
 Animator:
   serializedVersion: 3
@@ -769,7 +759,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340359039}
-  m_LocalRotation: {x: 0.15487324, y: -0.000000005209268, z: 8.166297e-10, w: 0.98793435}
+  m_LocalRotation: {x: 0.15487324, y: 1.8190642e-15, z: -7.96502e-16, w: 0.98793435}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -853,6 +843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 405389331}
   - component: {fileID: 405389332}
+  - component: {fileID: 405389333}
   m_Layer: 0
   m_Name: Arena Manager
   m_TagString: Untagged
@@ -890,6 +881,28 @@ MonoBehaviour:
   Player2: {fileID: 1371588944}
   Player3: {fileID: 1433772738}
   victoryCanvas: {fileID: 640987861}
+--- !u!114 &405389333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405389330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba38ece47de66cd448dde9c7c9693283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 6
+  turnSmoothTime: 0.1
+  maxHealth: 100
+  punchPower: 10
+  swordPower: 20
+  magicPower: 15
+  punchSpeed: 2
+  swordSpeed: 1
+  magicSpeed: 1.5
+  projectileSpeed: 10
 --- !u!43 &491142364
 Mesh:
   m_ObjectHideFlags: 0
@@ -3215,8 +3228,6 @@ MonoBehaviour:
   controller: {fileID: 1371588943}
   cam: {fileID: 963194228}
   anim: {fileID: 1371588947}
-  speed: 6
-  turnSmoothTime: 0.1
   HP: {fileID: 1371588945}
   isActive: 0
   attack: {fileID: 1371588946}
@@ -3234,7 +3245,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1371588944}
   healthBar: {fileID: 764043959}
-  maxHealth: 100
 --- !u!114 &1371588946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3250,13 +3260,6 @@ MonoBehaviour:
   player: {fileID: 1371588944}
   sword: {fileID: 648215539}
   hand: {fileID: 1509014301}
-  punchPower: 10
-  swordPower: 20
-  magicPower: 15
-  punchSpeed: 2
-  swordSpeed: 1
-  magicSpeed: 1
-  projectileSpeed: 10
 --- !u!95 &1371588947
 Animator:
   serializedVersion: 3
@@ -8409,8 +8412,6 @@ MonoBehaviour:
   controller: {fileID: 1433772737}
   cam: {fileID: 963194228}
   anim: {fileID: 1433772741}
-  speed: 6
-  turnSmoothTime: 0.1
   HP: {fileID: 1433772739}
   isActive: 0
   attack: {fileID: 1433772740}
@@ -8428,7 +8429,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1433772738}
   healthBar: {fileID: 1914480320}
-  maxHealth: 80
 --- !u!114 &1433772740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8444,13 +8444,6 @@ MonoBehaviour:
   player: {fileID: 1433772738}
   sword: {fileID: 1969561991}
   hand: {fileID: 1073636134}
-  punchPower: 10
-  swordPower: 20
-  magicPower: 15
-  punchSpeed: 2
-  swordSpeed: 1
-  magicSpeed: 1
-  projectileSpeed: 10
 --- !u!95 &1433772741
 Animator:
   serializedVersion: 3
