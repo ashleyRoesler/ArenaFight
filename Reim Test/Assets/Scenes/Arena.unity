@@ -468,12 +468,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 90341114}
   sword: {fileID: 10535690}
+  hand: {fileID: 1384164841}
   punchPower: 10
   swordPower: 20
   magicPower: 15
   punchSpeed: 2
   swordSpeed: 1
   magicSpeed: 1
+  projectileSpeed: 10
 --- !u!95 &90341119
 Animator:
   serializedVersion: 3
@@ -767,7 +769,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340359039}
-  m_LocalRotation: {x: 0.15487324, y: -0.000000005209268, z: 8.166297e-10, w: 0.98793435}
+  m_LocalRotation: {x: 0.15487322, y: -0.000000020821158, z: 0.0000000032640226, w: 0.98793435}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -894,7 +896,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh87916
+  m_Name: pb_Mesh14640
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2274,6 +2276,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1068387000}
   m_CullTransparentMesh: 0
+--- !u!1 &1073636134 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6240519616291359024, guid: bc20ebffa3223ae45b065374104f4573,
+    type: 3}
+  m_PrefabInstance: {fileID: 1349997091}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1093931692
 GameObject:
   m_ObjectHideFlags: 0
@@ -3241,12 +3249,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1371588944}
   sword: {fileID: 648215539}
+  hand: {fileID: 1509014301}
   punchPower: 10
   swordPower: 20
   magicPower: 15
   punchSpeed: 2
   swordSpeed: 1
   magicSpeed: 1
+  projectileSpeed: 10
 --- !u!95 &1371588947
 Animator:
   serializedVersion: 3
@@ -3266,6 +3276,12 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1384164841 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6240519616291359024, guid: bc20ebffa3223ae45b065374104f4573,
+    type: 3}
+  m_PrefabInstance: {fileID: 2034608782}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1420233996
 GameObject:
   m_ObjectHideFlags: 0
@@ -8427,12 +8443,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1433772738}
   sword: {fileID: 1969561991}
+  hand: {fileID: 1073636134}
   punchPower: 10
   swordPower: 20
   magicPower: 15
   punchSpeed: 2
   swordSpeed: 1
   magicSpeed: 1
+  projectileSpeed: 10
 --- !u!95 &1433772741
 Animator:
   serializedVersion: 3
@@ -8583,6 +8601,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2612345125773297317, guid: bc20ebffa3223ae45b065374104f4573,
     type: 3}
   m_PrefabInstance: {fileID: 1349997091}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1509014301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6240519616291359024, guid: bc20ebffa3223ae45b065374104f4573,
+    type: 3}
+  m_PrefabInstance: {fileID: 1933826906}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1521501397
 GameObject:
@@ -12403,7 +12427,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh87978
+  m_Name: pb_Mesh14702
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

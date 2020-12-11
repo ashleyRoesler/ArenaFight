@@ -9,7 +9,11 @@ public class Attack : MonoBehaviour
     [SerializeField]
     private GameObject sword;
 
-    private int attackId = 0;
+    GameObject projectile;              // magic projectile
+    [SerializeField]
+    private GameObject hand;            // player's hand, used for firing projectile
+
+    private int attackId = 0;           // type of attack (punch or sword)
 
     [Header("Damage Values")]
     [SerializeField]
@@ -26,6 +30,8 @@ public class Attack : MonoBehaviour
     private float swordSpeed = 1.0f;    // sword animation speed
     [SerializeField]
     private float magicSpeed = 1.0f;    // magic animation speed
+    [SerializeField]
+    private float projectileSpeed = 20.0f;      // magic projectile speed
 
     private bool attacking = false;     // false if attack animation is not playing
 
@@ -41,6 +47,9 @@ public class Attack : MonoBehaviour
 
         // start with sword sheathed
         sword.SetActive(false);
+
+        // get magic projectile
+        projectile = Resources.Load("magic projectile") as GameObject;
     }
 
     // Update is called once per frame
@@ -117,5 +126,16 @@ public class Attack : MonoBehaviour
             swordOn = true;
             attackId = 2;
         }
+    }
+
+    public void FireMagic()
+    {
+        // spawn magic projectile
+        GameObject magic = Instantiate(projectile) as GameObject;
+        magic.transform.position = hand.transform.position;
+
+        // fire projectile
+        Rigidbody rb = magic.GetComponent<Rigidbody>();
+        rb.velocity = player.transform.forward * projectileSpeed;
     }
 }

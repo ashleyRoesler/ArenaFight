@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bc20ebffa3223ae45b065374104f4573
+guid: 2488f8df2a9cd0747a2bc937d54bfdda
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,63 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Eye White
-    second: {fileID: 2100000, guid: 654c102a865052c48841dd8faef71d4c, type: 2}
+      name: Material.001
+    second: {fileID: 2100000, guid: 03e43fcfd968c694d83de5c3d5689b7e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Eye_Pupil
-    second: {fileID: 2100000, guid: 46a964d7e5f799f488bc7d7e562c6335, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerBag
-    second: {fileID: 2100000, guid: 4f51eefb4aa41e44dbe31d63a598210d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerBelt
-    second: {fileID: 2100000, guid: 453be7a3dd658c546a50a9b5d0b81a87, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerBoots
-    second: {fileID: 2100000, guid: 54dfb0163ae35604f85587c8da867109, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerHair
-    second: {fileID: 2100000, guid: 45bd95d68560b1145829a38ea700719a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerLashes
-    second: {fileID: 2100000, guid: 46a964d7e5f799f488bc7d7e562c6335, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerPants
-    second: {fileID: 2100000, guid: ec305d4a711172a43920b8f87017a1e6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerPonytail
-    second: {fileID: 2100000, guid: 8047e3cee406b6644be4d37ff1c0ef81, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerShirt.001
-    second: {fileID: 2100000, guid: 278276dd1524bcb428d4d60337709654, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerShirt2.001
-    second: {fileID: 2100000, guid: 438ef79a39c6bc643af94b73789283d6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerSkin
-    second: {fileID: 2100000, guid: 7539f27323290934daee1b957c810b31, type: 2}
+      name: Material.002
+    second: {fileID: 2100000, guid: fedd53686c5cdcf4abf378595bb125f2, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -103,7 +53,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    fileIdsGeneration: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

@@ -23,24 +23,6 @@ public class Health : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // test health
-        if (!player.isActive && !dead)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-               TakeDamage(10);
-            }
-        }
-
-        if (!player.isActive || dead)
-        {
-            return;
-        }
-    }
-
     public bool IsDead()
     {
         return dead;
