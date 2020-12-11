@@ -23,6 +23,10 @@ public class Attack : MonoBehaviour
     [SerializeField]
     private int magicPower = 15;        // magic hp damage
 
+    public static int punchP = 10;
+    public static int swordP = 20;
+    public static int magicP = 15;
+
     [Header("Attack Speeds")]
     [SerializeField]
     private float punchSpeed = 1.0f;    // punch animation speed
@@ -31,7 +35,7 @@ public class Attack : MonoBehaviour
     [SerializeField]
     private float magicSpeed = 1.0f;    // magic animation speed
     [SerializeField]
-    private float projectileSpeed = 20.0f;      // magic projectile speed
+    private float projectileSpeed = 50.0f;      // magic projectile speed
 
     private bool attacking = false;     // false if attack animation is not playing
 
@@ -40,6 +44,11 @@ public class Attack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // set static damage values
+        punchP = punchPower;
+        swordP = swordPower;
+        magicP = magicPower;
+
         // set attack speeds
         player.anim.SetFloat("Punch Speed", punchSpeed);
         player.anim.SetFloat("Sword Speed", swordSpeed);
@@ -136,6 +145,6 @@ public class Attack : MonoBehaviour
 
         // fire projectile
         Rigidbody rb = magic.GetComponent<Rigidbody>();
-        rb.velocity = player.transform.forward * projectileSpeed;
+        rb.AddForce(player.transform.forward * projectileSpeed, ForceMode.Force);
     }
 }
