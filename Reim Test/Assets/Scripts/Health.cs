@@ -61,6 +61,9 @@ public class Health : MonoBehaviour
 
             // make health bar disappear
             DisableHPBar();
+
+            // update arena manager
+            ArenaManager.numAlive--;
         }
     }
 

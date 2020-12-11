@@ -6,15 +6,15 @@ public class ArenaManager : MonoBehaviour
     public PlayerController Player2;      // reference to player 2
     public PlayerController Player3;      // reference to player 3
 
-    private bool gameOver = false;
+    public static int numAlive = 3;       // number of players left alive
+
+    private bool gameOver = false;        // true if only one player is left
 
     // Update is called once per frame
     void Update()
     {
         // check for win condition (one player is left standing)
-        if (!gameOver && ((!Player1.HP.IsDead() && Player2.HP.IsDead() && Player3.HP.IsDead()) || 
-            (Player1.HP.IsDead() && !Player2.HP.IsDead() && Player3.HP.IsDead()) || 
-            (Player1.HP.IsDead() && Player2.HP.IsDead() && !Player3.HP.IsDead())))
+        if (!gameOver && numAlive == 1)
         {
             gameOver = true;
 
