@@ -281,7 +281,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 29413ca48cf491b4d9fc92d8232b6317,
+  m_Motion: {fileID: -203655887218126122, guid: 9db27666aedec794c841cd34a4c9ccdb,
     type: 3}
   m_Tag: 
   m_SpeedParameter: Magic Speed
@@ -554,7 +554,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 265f9da0c120e3c42869bc3a8e0b9a1a,
+  m_Motion: {fileID: -203655887218126122, guid: 217741075a2c0944b9e026a97271af52,
     type: 3}
   m_Tag: 
   m_SpeedParameter: Punch Speed
