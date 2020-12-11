@@ -5,81 +5,116 @@ public class Attack : MonoBehaviour
     [Header("References")]
     [SerializeField]
     private PlayerController player;
+    [SerializeField]
+    private GameObject sword;
 
     private int attackId = 0;
 
     [Header("Damage Values")]
     [SerializeField]
     private int punchPower = 10;        // punch hp damage
-
     [SerializeField]
     private int swordPower = 20;        // sword hp damage
-
     [SerializeField]
-    private int magicPower = 30;        // magic hp damage
+    private int magicPower = 15;        // magic hp damage
 
     [Header("Attack Speeds")]
     [SerializeField]
-    private int punchSpeed = 1;        // punch animation speed
-
+    private float punchSpeed = 1.0f;    // punch animation speed
     [SerializeField]
-    private int swordSpeed = 1;        // sword animation speed
-
+    private float swordSpeed = 1.0f;    // sword animation speed
     [SerializeField]
-    private int magicSpeed = 1;        // magic animation speed
+    private float magicSpeed = 1.0f;    // magic animation speed
 
-    private bool attacking = false;   // false if attack animation is not playing
+    private bool attacking = false;     // false if attack animation is not playing
+
+    private bool swordOn = false;       // true if sword drawn
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // set attack speeds
+        player.anim.SetFloat("Punch Speed", punchSpeed);
+        player.anim.SetFloat("Sword Speed", swordSpeed);
+        player.anim.SetFloat("Magic Speed", magicSpeed);
+
+        // start with sword sheathed
+        sword.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (player.isActive && !attacking && Input.GetMouseButtonDown(0))
+        // make sure the player isn't already attacking
+        if (player.isActive && !attacking)
         {
-            // set attacking to true
-            player.anim.SetBool("Attacking", true);
-            attacking = true;
-
-            // set animation and attack type
-            player.anim.SetInteger("Attack Type", attackId);
-
-            switch (attackId)
+            // sheath/draw sword
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                case 0:
-                    Debug.Log("Left Punch");
-                    break;
-                case 1:
-                    Debug.Log("Right Punch");
-                    break;
-                case 2:
-                    Debug.Log("Sword Slice");
-                    break;
-                case 3:
-                    Debug.Log("Pew Pew Magic");
-                    break;
-                default:
-                    Debug.LogWarning("Bro, your attack id is wack.");
-                    break;
+                ToggleSword();
             }
 
-            if (attackId == 0)
+            // punch or swing sword
+            if (Input.GetMouseButtonDown(0))
             {
-                attackId = 1;
+                // set attacking to true
+                player.anim.SetBool("Attacking", true);
+                attacking = true;
+
+                // set animation and attack type
+                player.anim.SetInteger("Attack Type", attackId);
+
+                // switch punch
+                if (attackId == 0)
+                {
+                    attackId = 1;
+                }
+                else if (attackId == 1)
+                {
+                    attackId = 0;
+                }
+
             }
-            else if (attackId == 1)
+
+            // fire magic
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                attackId = 0;
+                // set attacking to true
+                player.anim.SetBool("Attacking", true);
+                attacking = true;
+
+                // set animation
+                player.anim.SetInteger("Attack Type", 3);
             }
         }
     }
 
-    void EndAttack()
+    public void EndAttack()
     {
+        // turn animation and attacking off
         attacking = false;
         player.anim.SetBool("Attacking", false);
     }
 
-    public bool isAttacking()
+    public bool IsAttacking()
     {
         return attacking;
+    }
+
+    public void ToggleSword()
+    {
+        // sheath sword
+        if (swordOn)
+        {
+            sword.SetActive(false);
+            swordOn = false;
+            attackId = 0;
+        }
+        else
+        {
+            sword.SetActive(true);
+            swordOn = true;
+            attackId = 2;
+        }
     }
 }

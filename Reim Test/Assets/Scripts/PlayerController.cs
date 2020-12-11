@@ -23,10 +23,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Attack attack;                      // player's attack information
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        // get reference to animator component
+        anim = gameObject.GetComponent<Animator>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (!isActive || attack.isAttacking())
+        if (!isActive || attack.IsAttacking())
         {
             return;
         }
