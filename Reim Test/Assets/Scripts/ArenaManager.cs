@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ArenaManager : MonoBehaviour
 {
@@ -6,9 +7,19 @@ public class ArenaManager : MonoBehaviour
     public PlayerController Player2;      // reference to player 2
     public PlayerController Player3;      // reference to player 3
 
+    [SerializeField]
+    private GameObject victoryCanvas;     // reference to victory screen
+
     public static int numAlive = 3;       // number of players left alive
 
     private bool gameOver = false;        // true if only one player is left
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // reset alive counter
+        numAlive = 3;
+    }
 
     // Update is called once per frame
     void Update()
@@ -17,6 +28,9 @@ public class ArenaManager : MonoBehaviour
         if (!gameOver && numAlive == 1)
         {
             gameOver = true;
+
+            // display victory screen
+            victoryCanvas.SetActive(true);
 
             // player 1 is the winner
             if (!Player1.HP.IsDead())
