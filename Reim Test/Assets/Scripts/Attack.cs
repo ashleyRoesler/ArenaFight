@@ -10,6 +10,8 @@ public class Attack : MonoBehaviour
     private GameObject sword;           // player's sword
     [SerializeField]
     private GameObject hand;            // player's hand, used for firing projectile
+    [SerializeField]
+    private GameObject punch;           // player's punch volume
 
     private GameObject projectile;      // magic projectile
 
@@ -26,10 +28,6 @@ public class Attack : MonoBehaviour
         player.anim.SetFloat("Punch Speed", Stats.punchS);
         player.anim.SetFloat("Sword Speed", Stats.swordS);
         player.anim.SetFloat("Magic Speed", Stats.magicS);
-
-        // start with sword sheathed
-        sword.SetActive(false);
-        ToggleSwordCollision();
 
         // get magic projectile
         projectile = Resources.Load("magic projectile") as GameObject;
@@ -62,9 +60,11 @@ public class Attack : MonoBehaviour
                 {
                     case 0:
                         attackId = 1;
+                        punch.GetComponent<Melee>().ResetCollide();
                         break;
                     case 1:
                         attackId = 0;
+                        punch.GetComponent<Melee>().ResetCollide();
                         break;
                     case 2:
                         sword.GetComponent<Melee>().ResetCollide();
@@ -91,8 +91,12 @@ public class Attack : MonoBehaviour
         attacking = false;
         player.anim.SetBool("Attacking", false);
 
-        // turn sword collision off
-        if (attackId == 2)
+        // turn attack collision off
+        if (attackId < 2)
+        {
+            TogglePunchCollision();
+        }
+        else if (attackId == 2)
         {
             ToggleSwordCollision();
         }
@@ -126,6 +130,11 @@ public class Attack : MonoBehaviour
     public void ToggleSwordCollision()
     {
         sword.GetComponent<BoxCollider>().enabled = !sword.GetComponent<BoxCollider>().enabled;
+    }
+
+    public void TogglePunchCollision()
+    {
+        punch.GetComponent<BoxCollider>().enabled = !punch.GetComponent<BoxCollider>().enabled;
     }
 
     public void FireMagic()

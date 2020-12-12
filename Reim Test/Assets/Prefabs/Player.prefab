@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &372765845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 372765846}
+  - component: {fileID: 372765847}
+  - component: {fileID: 372765848}
+  m_Layer: 9
+  m_Name: Punch Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &372765846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372765845}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1495132888529152227}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &372765847
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372765845}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9405384, y: 0.96302056, z: 0.48796272}
+  m_Center: {x: 0.00074481964, y: 0.2958001, z: -0.25601864}
+--- !u!114 &372765848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372765845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f730960af70e8b4198d30a505c248f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1495132888529152229}
 --- !u!1 &1495132887519773879
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +424,7 @@ GameObject:
   - component: {fileID: 1495132888529152230}
   - component: {fileID: 1495132888529152229}
   m_Layer: 9
-  m_Name: Player 1
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,6 +444,7 @@ Transform:
   - {fileID: 5892242948262123407}
   - {fileID: 1495132887942602294}
   - {fileID: 1495132887519773878}
+  - {fileID: 372765846}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -503,6 +562,7 @@ MonoBehaviour:
   player: {fileID: 1495132888529152225}
   sword: {fileID: 1765040110738706155}
   hand: {fileID: 4457155198409230917}
+  punch: {fileID: 372765845}
 --- !u!1 &1495132888603219542
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,6 +1161,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword
       objectReference: {fileID: 0}
+    - target: {fileID: 6962714697175913817, guid: c5409878005eebb4dbc6a3f2f347e57d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7776406540428218339, guid: c5409878005eebb4dbc6a3f2f347e57d,
         type: 3}
       propertyPath: m_RootOrder
@@ -1155,6 +1220,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809771655221235362, guid: c5409878005eebb4dbc6a3f2f347e57d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5409878005eebb4dbc6a3f2f347e57d, type: 3}
