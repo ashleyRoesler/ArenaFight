@@ -26,6 +26,12 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        // make sure not already dead
+        if (dead)
+        {
+            return;
+        }
+
         // decrease health
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
@@ -39,6 +45,10 @@ public class Health : MonoBehaviour
 
             // make health bar disappear
             DisableHPBar();
+
+            // turn player collision off
+            gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            gameObject.GetComponent<CharacterController>().enabled = false;
 
             // update arena manager
             ArenaManager.numAlive--;
