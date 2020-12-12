@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public class Sword : MonoBehaviour
+public class Melee : MonoBehaviour
 {
     [SerializeField]
-    private Attack player;              // sword owner player reference
+    private Attack player;              // player reference
 
     private bool hasCollide = false;    // true if already collided
 
@@ -16,11 +16,18 @@ public class Sword : MonoBehaviour
             hasCollide = true;
 
             // apply damage to the player that was hit
-            other.gameObject.GetComponent<PlayerController>().HP.TakeDamage(Stats.swordP);
+            if (player.getSwordToggle())    // sword damage
+            {
+                other.gameObject.GetComponent<PlayerController>().HP.TakeDamage(Stats.swordP);
+            }
+            else                           // punch damage
+            {
+                other.gameObject.GetComponent<PlayerController>().HP.TakeDamage(Stats.punchP);
+            }
         }
     }
 
-    public void ResetSword()
+    public void ResetCollide()
     {
         hasCollide = false;
     }

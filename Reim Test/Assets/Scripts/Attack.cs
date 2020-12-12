@@ -66,7 +66,7 @@ public class Attack : MonoBehaviour
                         attackId = 0;
                         break;
                     case 2:
-                        sword.GetComponent<Sword>().ResetSword();
+                        sword.GetComponent<Melee>().ResetCollide();
                         break;
                 }
             }
@@ -94,6 +94,11 @@ public class Attack : MonoBehaviour
     public bool IsAttacking()
     {
         return attacking;
+    }
+
+    public bool getSwordToggle()
+    {
+        return swordOn;
     }
 
     public void ToggleSword(bool onf)
