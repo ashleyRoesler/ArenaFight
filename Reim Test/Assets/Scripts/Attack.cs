@@ -47,7 +47,7 @@ public class Attack : MonoBehaviour
             }
 
             // punch or swing sword
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !attacking)
             {
                 // set attacking to true
                 player.anim.SetBool("Attacking", true);
