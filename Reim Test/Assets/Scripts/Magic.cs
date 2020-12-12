@@ -2,12 +2,12 @@
 
 public class Magic : MonoBehaviour
 {
-    private bool hasCollide = false;
+    private bool hasCollide = false;    // true if already collided
 
     private void OnTriggerEnter(Collider other)
     {
         // damage player
-        if (!hasCollide && other.gameObject.tag == "Player")
+        if (!hasCollide && other.gameObject.CompareTag("Player"))
         {
             // prevent double collisions
             hasCollide = true;

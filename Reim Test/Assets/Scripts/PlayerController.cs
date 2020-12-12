@@ -14,8 +14,7 @@ public class PlayerController : MonoBehaviour
     public bool isActive;
 
     [Header("Player Attack")]
-    [SerializeField]
-    private Attack attack;                      // player's attack information
+    public Attack attack;                      // player's attack information
 
     // Start is called before the first frame update
     void Start()
@@ -60,5 +59,11 @@ public class PlayerController : MonoBehaviour
             // set animation to idle
             anim.SetBool("IsRunning", false);
         }
+    }
+
+    private void OnDisable()
+    {
+        // make sure sword disappears on death or victory
+        attack.ToggleSword(false);
     }
 }

@@ -43,7 +43,7 @@ public class Attack : MonoBehaviour
             // sheath/draw sword
             if (Input.GetKeyDown(KeyCode.F))
             {
-                ToggleSword();
+                ToggleSword(!swordOn);
             }
 
             // punch or swing sword
@@ -56,16 +56,19 @@ public class Attack : MonoBehaviour
                 // set animation and attack type
                 player.anim.SetInteger("Attack Type", attackId);
 
-                // switch punch
-                if (attackId == 0)
+                // switch punches or reset sword
+                switch (attackId)
                 {
-                    attackId = 1;
+                    case 0:
+                        attackId = 1;
+                        break;
+                    case 1:
+                        attackId = 0;
+                        break;
+                    case 2:
+                        sword.GetComponent<Sword>().ResetSword();
+                        break;
                 }
-                else if (attackId == 1)
-                {
-                    attackId = 0;
-                }
-
             }
 
             // fire magic
@@ -93,20 +96,18 @@ public class Attack : MonoBehaviour
         return attacking;
     }
 
-    public void ToggleSword()
+    public void ToggleSword(bool onf)
     {
-        // sheath sword
-        if (swordOn)
+        sword.SetActive(onf);
+        swordOn = onf;
+
+        if (onf)    // turn sword on
         {
-            sword.SetActive(false);
-            swordOn = false;
-            attackId = 0;
-        }
-        else
-        {
-            sword.SetActive(true);
-            swordOn = true;
             attackId = 2;
+        }
+        else       // turn sword off
+        {
+            attackId = 0;
         }
     }
 
