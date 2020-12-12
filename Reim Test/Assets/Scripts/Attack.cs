@@ -29,6 +29,7 @@ public class Attack : MonoBehaviour
 
         // start with sword sheathed
         sword.SetActive(false);
+        ToggleSwordCollision();
 
         // get magic projectile
         projectile = Resources.Load("magic projectile") as GameObject;
@@ -89,6 +90,12 @@ public class Attack : MonoBehaviour
         // turn animation and attacking off
         attacking = false;
         player.anim.SetBool("Attacking", false);
+
+        // turn sword collision off
+        if (attackId == 2)
+        {
+            ToggleSwordCollision();
+        }
     }
 
     public bool IsAttacking()
@@ -114,6 +121,11 @@ public class Attack : MonoBehaviour
         {
             attackId = 0;
         }
+    }
+
+    public void ToggleSwordCollision()
+    {
+        sword.GetComponent<BoxCollider>().enabled = !sword.GetComponent<BoxCollider>().enabled;
     }
 
     public void FireMagic()
