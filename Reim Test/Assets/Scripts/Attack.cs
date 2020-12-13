@@ -91,6 +91,12 @@ public class Attack : MonoBehaviour
         attacking = false;
         player.anim.SetBool("Attacking", false);
 
+        // only turn off attack collision for melee, not magic
+        if (player.anim.GetInteger("Attack Type") == 3)
+        {
+            return;
+        }
+
         // turn attack collision off
         if (attackId < 2)
         {
