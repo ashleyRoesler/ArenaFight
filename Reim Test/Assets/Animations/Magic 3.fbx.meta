@@ -59,15 +59,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 1
-        functionName: EndAttack
+      - time: 0.3580247
+        functionName: FireMagic
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.3580247
-        functionName: FireMagic
+      - time: 0.8479532
+        functionName: EndAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
