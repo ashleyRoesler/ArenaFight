@@ -73,7 +73,7 @@ public class Attack : MonoBehaviour
             }
 
             // fire magic
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Q) && !attacking)
             {
                 // set attacking to true
                 player.anim.SetBool("Attacking", true);
