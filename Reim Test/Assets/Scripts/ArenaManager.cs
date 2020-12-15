@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ArenaManager : MonoBehaviour
 {
@@ -19,6 +18,9 @@ public class ArenaManager : MonoBehaviour
     {
         // reset alive counter
         numAlive = 3;
+
+        // turn cursor off
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -29,8 +31,9 @@ public class ArenaManager : MonoBehaviour
         {
             gameOver = true;
 
-            // display victory screen
+            // display victory screen and turn cursor back on
             victoryCanvas.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
 
             // player 1 is the winner
             if (!Player1.HP.IsDead())

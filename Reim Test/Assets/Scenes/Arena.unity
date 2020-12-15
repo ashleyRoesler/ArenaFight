@@ -18764,7 +18764,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.16358186, y: 0.001229743, z: -0.0002039105, w: 0.986529}
+  m_LocalRotation: {x: 0.1635819, y: 0.0010662957, z: -0.00017680839, w: 0.9865292}
   m_LocalPosition: {x: -19.2, y: 2.6901429, z: -13.558222}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -31740,7 +31740,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845141920}
-  m_LocalRotation: {x: 0.124990605, y: 0.000000008535724, z: -0.0000000010753181,
+  m_LocalRotation: {x: 0.124990605, y: -0.000000008535724, z: 0.0000000010753181,
     w: 0.99215794}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32255,7 +32255,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878724140}
-  m_LocalRotation: {x: 0.16358183, y: 0.001229743, z: -0.00020391049, w: 0.986529}
+  m_LocalRotation: {x: 0.16358186, y: 0.0010662955, z: -0.00017680835, w: 0.9865292}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -35558,9 +35558,9 @@ MonoBehaviour:
     m_MaxSpeed: 4
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: 
+    m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
-    m_InvertInput: 0
+    m_InvertInput: 1
     m_MinValue: 0
     m_MaxValue: 1
     m_Wrap: 0
@@ -35584,7 +35584,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1
