@@ -578,18 +578,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82323319}
   m_CullTransparentMesh: 0
---- !u!114 &90341114 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1495132888529152225, guid: 5f4ba6d0e6461e94aaed3aa509037216,
-    type: 3}
-  m_PrefabInstance: {fileID: 1495132888611083803}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 904df28243cfe6e4293b198ece42020f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &123551778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -734,18 +722,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3e8553e195c1ac242ad6e33bd18316bc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f4ba6d0e6461e94aaed3aa509037216, type: 3}
---- !u!114 &123551779 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1495132888529152225, guid: 5f4ba6d0e6461e94aaed3aa509037216,
-    type: 3}
-  m_PrefabInstance: {fileID: 123551778}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 904df28243cfe6e4293b198ece42020f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &124358931
 GameObject:
   m_ObjectHideFlags: 0
@@ -6235,7 +6211,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340359039}
-  m_LocalRotation: {x: 0.1609482, y: -0.000000016982064, z: 0.000000002769337, w: 0.98696285}
+  m_LocalRotation: {x: 0.1609482, y: 0.000000016982057, z: -0.0000000027693359, w: 0.98696285}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8346,7 +8322,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405389331}
-  - component: {fileID: 405389332}
   - component: {fileID: 405389333}
   m_Layer: 0
   m_Name: Arena Manager
@@ -8369,22 +8344,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &405389332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405389330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 564e911f73c78694189bcf9e8dd2f375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player1: {fileID: 90341114}
-  Player2: {fileID: 1856051183}
-  Player3: {fileID: 123551779}
-  victoryCanvas: {fileID: 640987861}
 --- !u!114 &405389333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31740,7 +31699,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845141920}
-  m_LocalRotation: {x: 0.124990605, y: -0.000000008535724, z: 0.0000000010753181,
+  m_LocalRotation: {x: 0.124990605, y: 0.000000008535724, z: -0.0000000010753181,
     w: 0.99215794}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32014,18 +31973,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 47686088ee7f43c4f835edcd098f560b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f4ba6d0e6461e94aaed3aa509037216, type: 3}
---- !u!114 &1856051183 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1495132888529152225, guid: 5f4ba6d0e6461e94aaed3aa509037216,
-    type: 3}
-  m_PrefabInstance: {fileID: 1856051182}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 904df28243cfe6e4293b198ece42020f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &1860664277
 Mesh:
   m_ObjectHideFlags: 0
