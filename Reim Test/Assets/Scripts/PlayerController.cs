@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
+using MLAPI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkedBehaviour
 {
     [Header("References")]
     public CharacterController controller;      // player controller reference
-    public Transform cam;                       // camera reference
-    public Animator anim;                       // animator reference        
+   // public Transform cam;                       // camera reference
+    public Animator anim;                       // animator reference 
+
+    [SerializeField]
+    private GameObject localCam;
 
     private float turnSmoothVelocity;           // current smooth velocity
 
@@ -19,6 +23,13 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // spawn a camera for the local player
+        if (IsLocalPlayer && isActive)
+        {
+            Instantiate(localCam, gameObject.transform.position, Quaternion.identity);
+            localCam.GetComponent<CameraController>().SetCamLook(gameObject.transform);
+        }
+
         // get reference to animator component
         anim = gameObject.GetComponent<Animator>();
     }
@@ -46,7 +57,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("IsRunning", true);
 
             // rotate player to make them look where they are going (based on camera rotation as well)
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + localCam.transform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, Stats.sSmoothT);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
@@ -65,5 +76,10 @@ public class PlayerController : MonoBehaviour
     {
         // make sure sword disappears on death or victory
         attack.ToggleSword(false);
+    }
+
+    public Transform GetCamTransform()
+    {
+        return localCam.transform;
     }
 }
