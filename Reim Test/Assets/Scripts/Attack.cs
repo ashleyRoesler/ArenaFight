@@ -37,7 +37,7 @@ public class Attack : MonoBehaviour
     void Update()
     {
         // make sure the player isn't already attacking
-        if (player.isActive && !attacking)
+        if (!attacking)
         {
             // sheath/draw sword
             if (Input.GetKeyDown(KeyCode.F))
@@ -113,7 +113,7 @@ public class Attack : MonoBehaviour
         return attacking;
     }
 
-    public bool getSwordToggle()
+    public bool GetSwordToggle()
     {
         return swordOn;
     }

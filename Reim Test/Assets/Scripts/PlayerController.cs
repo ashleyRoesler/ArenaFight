@@ -1,33 +1,36 @@
 ﻿using UnityEngine;
 using MLAPI;
+using Cinemachine;
 
 public class PlayerController : NetworkedBehaviour
 {
     [Header("References")]
     public CharacterController controller;      // player controller reference
-   // public Transform cam;                       // camera reference
     public Animator anim;                       // animator reference 
-
     [SerializeField]
-    private GameObject localCam;
+    private GameObject localCam;                // player camera reference
+    [SerializeField]
+    private Transform lookAt;                   // player camera's focus
 
     private float turnSmoothVelocity;           // current smooth velocity
 
     [Header("Player Health")]
     public Health HP;                           // player's health information
-    public bool isActive;
 
     [Header("Player Attack")]
-    public Attack attack;                      // player's attack information
+    public Attack attack;                       // player's attack information
 
     // Start is called before the first frame update
     void Start()
     {
         // spawn a camera for the local player
-        if (IsLocalPlayer && isActive)
+        if (IsLocalPlayer)
         {
-            Instantiate(localCam, gameObject.transform.position, Quaternion.identity);
-            localCam.GetComponent<CameraController>().SetCamLook(gameObject.transform);
+            Instantiate(localCam, lookAt.position, Quaternion.identity);
+
+            // force camera to look at player
+            localCam.GetComponentInChildren<CinemachineFreeLook>().LookAt = lookAt;
+            localCam.GetComponentInChildren<CinemachineFreeLook>().Follow = lookAt;
         }
 
         // get reference to animator component
@@ -37,7 +40,7 @@ public class PlayerController : NetworkedBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isActive || attack.IsAttacking())
+        if (attack.IsAttacking())
         {
             return;
         }

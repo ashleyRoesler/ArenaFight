@@ -16,7 +16,7 @@ public class Melee : MonoBehaviour
             hasCollide = true;
 
             // apply damage to the player that was hit
-            if (player.getSwordToggle())    // sword damage
+            if (player.GetSwordToggle())    // sword damage
             {
                 other.gameObject.GetComponent<PlayerController>().HP.TakeDamage(Stats.swordP);
             }

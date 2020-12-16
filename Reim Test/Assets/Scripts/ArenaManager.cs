@@ -1,23 +1,25 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 public class ArenaManager : MonoBehaviour
 {
-    public PlayerController Player1;      // reference to player 1
-    public PlayerController Player2;      // reference to player 2
-    public PlayerController Player3;      // reference to player 3
+    private List<PlayerController> players;
 
     [SerializeField]
     private GameObject victoryCanvas;     // reference to victory screen
 
-    public static int numAlive = 3;       // number of players left alive
+    public static int numAlive;           // number of players left alive
 
     private bool gameOver = false;        // true if only one player is left
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        // get list of players
+        players = Object.FindObjectsOfType<PlayerController>().ToList();
+
         // reset alive counter
-        numAlive = 3;
+        numAlive = players.Count;
 
         // turn cursor off
         Cursor.lockState = CursorLockMode.Locked;
@@ -35,37 +37,18 @@ public class ArenaManager : MonoBehaviour
             victoryCanvas.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
 
-            // player 1 is the winner
-            if (!Player1.HP.IsDead())
+            // determine who is the winner
+            foreach (PlayerController pc in players)
             {
-                // play animation and disable script
-                Player1.anim.SetBool("Winner", true);
-                Player1.enabled = false;
+                if (!pc.HP.IsDead())
+                {
+                    // play animation and disable script
+                    pc.anim.SetBool("Winner", true);
+                    pc.enabled = false;
 
-                // make health bar disappear
-                Player1.HP.DisableHPBar();
-            }
-
-            // player 2 is the winner
-            else if (!Player2.HP.IsDead())
-            {
-                // play animation and disable script
-                Player2.anim.SetBool("Winner", true);
-                Player2.enabled = false;
-
-                // make health bar disappear
-                Player2.HP.DisableHPBar();
-            }
-
-            // player 3 is the winner
-            else
-            {
-                // play animation and disable script
-                Player3.anim.SetBool("Winner", true);
-                Player3.enabled = false;
-
-                // make health bar disappear
-                Player3.HP.DisableHPBar();
+                    // make health bar disappear
+                    pc.HP.DisableHPBar();
+                }
             }
         }
     }

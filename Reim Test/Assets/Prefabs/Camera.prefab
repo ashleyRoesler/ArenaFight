@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7982002709689499144}
   - component: {fileID: 7982002709689499145}
   - component: {fileID: 7982002709689499150}
-  - component: {fileID: 6293568736832328339}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -120,18 +119,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6293568736832328339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7982002709689499146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f86ae305c4bfb7c4c9f233e447cae200, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7982002709699231717
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,10 +372,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 1495132888529152227, guid: 5f4ba6d0e6461e94aaed3aa509037216,
-    type: 3}
-  m_Follow: {fileID: 1495132888529152227, guid: 5f4ba6d0e6461e94aaed3aa509037216,
-    type: 3}
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
   m_CommonLens: 1
   m_Lens:
     FieldOfView: 40
