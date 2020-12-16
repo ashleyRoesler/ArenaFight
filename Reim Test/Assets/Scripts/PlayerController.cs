@@ -24,13 +24,18 @@ public class PlayerController : NetworkedBehaviour
     void Start()
     {
         // spawn a camera for the local player
-        if (IsLocalPlayer)
+     /*   if (IsLocalPlayer)
         {
-            Instantiate(localCam, lookAt.position, Quaternion.identity);
+            Instantiate(localCam, new Vector3(0f, 1.8f, -5.6f), Quaternion.identity);
 
             // force camera to look at player
-            localCam.GetComponentInChildren<CinemachineFreeLook>().LookAt = lookAt;
-            localCam.GetComponentInChildren<CinemachineFreeLook>().Follow = lookAt;
+            localCam.GetComponentInChildren<CinemachineFreeLook>().m_LookAt = lookAt;
+            localCam.GetComponentInChildren<CinemachineFreeLook>().m_Follow = lookAt;
+        }*/
+
+        if (!IsLocalPlayer)
+        {
+            localCam.SetActive(false);
         }
 
         // get reference to animator component
