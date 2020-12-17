@@ -17,8 +17,8 @@ public class ArenaManager : NetworkedBehaviour
 
     public static int numAlive = 0;       // number of players left alive
 
-    private bool gameOver = false;        // true if only one player is left
-    private bool gameStart = false;       // true if max player count reached (game is ready to start)
+    private bool gameOver = false;              // true if only one player is left
+    public static bool gameStart = false;       // true if max player count reached (game is ready to start)
 
     /*=====================================================
                     NETWORK INITIALIZATION
@@ -64,8 +64,6 @@ public class ArenaManager : NetworkedBehaviour
             approve = true;
             createPlayerObject = true;
 
-            Debug.Log("YEYEYEY");
-
             // for spawning different player prefabs at different locations
             switch (numAlive)
             {
@@ -109,8 +107,9 @@ public class ArenaManager : NetworkedBehaviour
         // initialize players list
         players = new List<PlayerController>();
 
-        // reset alive counter
+        // reset static variables
         numAlive = 0;
+        gameStart = false;
     }
 
     public void AddPlayer(PlayerController player)

@@ -29,6 +29,11 @@ public class PlayerController : NetworkedBehaviour
         {
             attack.enabled = true;
         }
+
+        if (!IsLocalPlayer)
+        {
+            Debug.Log("enable");
+        }
     }
 
     void Start()
@@ -47,7 +52,11 @@ public class PlayerController : NetworkedBehaviour
             controller.enabled = false;
         }
 
-        enabled = false;
+        // make sure player cannot move before the game starts
+        if (!ArenaManager.gameStart)
+        {
+            enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -93,6 +102,12 @@ public class PlayerController : NetworkedBehaviour
     {
         // make sure sword disappears on death or victory
         attack.ToggleSword(false);
+
+
+        if (!IsLocalPlayer)
+        {
+            Debug.Log("disable");
+        }
     }
 
     public Transform GetCamTransform()
