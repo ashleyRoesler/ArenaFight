@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using MLAPI;
-using Cinemachine;
 
 public class PlayerController : NetworkedBehaviour
 {
@@ -28,11 +27,6 @@ public class PlayerController : NetworkedBehaviour
         if (attack)
         {
             attack.enabled = true;
-        }
-
-        if (!IsLocalPlayer)
-        {
-            Debug.Log("enable");
         }
     }
 

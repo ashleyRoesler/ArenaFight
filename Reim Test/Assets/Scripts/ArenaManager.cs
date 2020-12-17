@@ -10,45 +10,41 @@ public class ArenaManager : NetworkedBehaviour
     private List<GameObject> spawnAreas;        // list of player spawn areas
     
     [Header("Required Player Count")]
-    public int requiredPlayerCount = 3;   // number of players needed to start the game
+    public int requiredPlayerCount = 3;         // number of players needed to start the game
 
     [SerializeField]
-    private GameObject victoryCanvas;     // reference to victory screen
+    private GameObject victoryCanvas;           // reference to victory screen
 
-    public static int numAlive = 0;       // number of players left alive
+    public static int numAlive = 0;             // number of players left alive
 
     private bool gameOver = false;              // true if only one player is left
     public static bool gameStart = false;       // true if max player count reached (game is ready to start)
 
+    private static bool isGameHost = false;         // true if local player is game host
+
     /*=====================================================
-                    NETWORK INITIALIZATION
+                        JOINING GAME
     =====================================================*/
-    private bool hasClicked = false;
-
-    private void OnGUI()
+    public static void BeHost(bool yes)
     {
-        if (!hasClicked && GUI.Button(new Rect(20, 20, 100, 20), "Start Host"))
-        {
-            NetworkingManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
-            NetworkingManager.Singleton.StartHost(spawnAreas[0].transform.position, spawnAreas[0].transform.rotation);
+        isGameHost = yes;
+    }
 
-            // turn cursor off
-            Cursor.lockState = CursorLockMode.Locked;
+    private void StartHost()
+    {
+        NetworkingManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
+        NetworkingManager.Singleton.StartHost(spawnAreas[0].transform.position, spawnAreas[0].transform.rotation);
 
-            // turn button off
-            hasClicked = true;
-        }
+        // turn cursor off
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
-        if (!hasClicked && GUI.Button(new Rect(20, 120, 100, 20), "Start Client"))
-        {
-            NetworkingManager.Singleton.StartClient();
+    private void StartClient()
+    {
+        NetworkingManager.Singleton.StartClient();
 
-            // turn cursor off
-            Cursor.lockState = CursorLockMode.Locked;
-
-            // turn button off
-            hasClicked = true;
-        }
+        // turn cursor off
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void ApprovalCheck(byte[] connectionData, ulong clientId, MLAPI.NetworkingManager.ConnectionApprovedDelegate callback)
@@ -110,6 +106,16 @@ public class ArenaManager : NetworkedBehaviour
         // reset static variables
         numAlive = 0;
         gameStart = false;
+
+        // start game
+        if (isGameHost)
+        {
+            StartHost();
+        }
+        else
+        {
+            StartClient();
+        }
     }
 
     public void AddPlayer(PlayerController player)
