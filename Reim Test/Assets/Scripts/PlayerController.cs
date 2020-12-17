@@ -5,7 +5,7 @@ using Cinemachine;
 public class PlayerController : NetworkedBehaviour
 {
     [Header("References")]
-    public CharacterController controller;      // player controller reference
+    private CharacterController controller;     // player controller reference
     public Animator anim;                       // animator reference 
     [SerializeField]
     private GameObject localCam;                // player camera reference
@@ -20,26 +20,26 @@ public class PlayerController : NetworkedBehaviour
     [Header("Player Attack")]
     public Attack attack;                       // player's attack information
 
+    public delegate void JoinGame(PlayerController player);
+    public static event JoinGame OnJoin;
+
+    private void Awake()
+    {
+        // tell the Arena Manager that you have joined the game
+        OnJoin(this);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        // spawn a camera for the local player
-     /*   if (IsLocalPlayer)
-        {
-            Instantiate(localCam, new Vector3(0f, 1.8f, -5.6f), Quaternion.identity);
-
-            // force camera to look at player
-            localCam.GetComponentInChildren<CinemachineFreeLook>().m_LookAt = lookAt;
-            localCam.GetComponentInChildren<CinemachineFreeLook>().m_Follow = lookAt;
-        }*/
-
         if (!IsLocalPlayer)
         {
             localCam.SetActive(false);
         }
 
-        // get reference to animator component
+        // get reference to components
         anim = gameObject.GetComponent<Animator>();
+        controller = gameObject.GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
