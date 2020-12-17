@@ -29,30 +29,23 @@ public class PlayerController : NetworkedBehaviour
         // tell the Arena Manager that you have joined the game
         OnJoin(this);
 
-        if (!IsLocalPlayer)
-        {
-            localCam.SetActive(false);
-        }
-
         // get reference to components
         anim = gameObject.GetComponent<Animator>();
         controller = gameObject.GetComponent<CharacterController>();
 
-        if (anim)
+        // turn off camera and component control for non-local players
+        if (!IsLocalPlayer)
         {
-            Debug.Log("Anim yes");
-        }
-
-        if (controller)
-        {
-            Debug.Log("controller yes");
+            localCam.SetActive(false);
+            controller.enabled = false;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (attack.IsAttacking())
+        // don't move if you are attacking or not local player
+        if (attack.IsAttacking() || !IsLocalPlayer)
         {
             return;
         }

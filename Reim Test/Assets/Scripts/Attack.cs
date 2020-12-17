@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using MLAPI;
 
-public class Attack : MonoBehaviour
+public class Attack : NetworkedBehaviour
 {
     [Header("References")]
     [SerializeField]
@@ -37,7 +37,7 @@ public class Attack : MonoBehaviour
     void Update()
     {
         // make sure the player isn't already attacking
-        if (!attacking)
+        if (!attacking && IsLocalPlayer)
         {
             // sheath/draw sword
             if (Input.GetKeyDown(KeyCode.F))
