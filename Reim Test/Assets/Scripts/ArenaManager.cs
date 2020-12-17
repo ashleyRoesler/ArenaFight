@@ -4,7 +4,7 @@ using System.Linq;
 
 public class ArenaManager : MonoBehaviour
 {
-    private readonly List<PlayerController> players;     // list of current players
+    private List<PlayerController> players;              // list of current players
 
     private Dictionary<Transform, bool> startSpots;      // places where players can spawn, and if they have already been filled
     
@@ -35,6 +35,9 @@ public class ArenaManager : MonoBehaviour
         var places = GameObject.FindGameObjectsWithTag("Spawn").ToList();
         startSpots = places.ToDictionary(key => key.transform, value => false);
 
+        // initialize players list
+        players = new List<PlayerController>();
+
         // reset alive counter
         numAlive = 0;
 
@@ -53,7 +56,6 @@ public class ArenaManager : MonoBehaviour
         players.Add(player);
         numAlive++;
 
-        // move player to proper starting place
         foreach(var pair in startSpots)
         {
             if (!pair.Value)
@@ -63,6 +65,7 @@ public class ArenaManager : MonoBehaviour
 
                 // mark spot as filled
                 startSpots[pair.Key] = true;
+                break;
             }
         }
 

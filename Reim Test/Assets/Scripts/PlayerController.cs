@@ -23,15 +23,12 @@ public class PlayerController : NetworkedBehaviour
     public delegate void JoinGame(PlayerController player);
     public static event JoinGame OnJoin;
 
-    private void Awake()
-    {
-        // tell the Arena Manager that you have joined the game
-        OnJoin(this);
-    }
-
     // Start is called before the first frame update
     void Start()
     {
+        // tell the Arena Manager that you have joined the game
+        OnJoin(this);
+
         if (!IsLocalPlayer)
         {
             localCam.SetActive(false);
@@ -40,6 +37,16 @@ public class PlayerController : NetworkedBehaviour
         // get reference to components
         anim = gameObject.GetComponent<Animator>();
         controller = gameObject.GetComponent<CharacterController>();
+
+        if (anim)
+        {
+            Debug.Log("Anim yes");
+        }
+
+        if (controller)
+        {
+            Debug.Log("controller yes");
+        }
     }
 
     // Update is called once per frame
