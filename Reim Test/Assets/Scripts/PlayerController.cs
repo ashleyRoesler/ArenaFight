@@ -23,7 +23,14 @@ public class PlayerController : NetworkedBehaviour
     public delegate void JoinGame(PlayerController player);
     public static event JoinGame OnJoin;
 
-    // Start is called before the first frame update
+    private void OnEnable()
+    {
+        if (attack)
+        {
+            attack.enabled = true;
+        }
+    }
+
     void Start()
     {
         // tell the Arena Manager that you have joined the game
@@ -39,6 +46,8 @@ public class PlayerController : NetworkedBehaviour
             localCam.SetActive(false);
             controller.enabled = false;
         }
+
+        enabled = false;
     }
 
     // Update is called once per frame

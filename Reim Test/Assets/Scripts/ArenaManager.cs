@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using MLAPI;
 
-public class ArenaManager : MonoBehaviour
+public class ArenaManager : NetworkedBehaviour
 {
-    private List<PlayerController> players;              // list of current players
-
-    private Dictionary<Transform, bool> startSpots;      // places where players can spawn, and if they have already been filled
+    private List<PlayerController> players;     // list of current players
+    private List<GameObject> spawnAreas;        // list of player spawn areas
     
     [Header("Required Player Count")]
     public int requiredPlayerCount = 3;   // number of players needed to start the game
@@ -32,8 +32,7 @@ public class ArenaManager : MonoBehaviour
     void Awake()
     {
         // get all spawn locations and initialize start spots
-        var places = GameObject.FindGameObjectsWithTag("Spawn").ToList();
-        startSpots = places.ToDictionary(key => key.transform, value => false);
+        spawnAreas = GameObject.FindGameObjectsWithTag("Spawn").ToList();
 
         // initialize players list
         players = new List<PlayerController>();
@@ -43,6 +42,9 @@ public class ArenaManager : MonoBehaviour
 
         // turn cursor off
         Cursor.lockState = CursorLockMode.Locked;
+
+        // start host
+        NetworkingManager.Singleton.StartHost(spawnAreas[0].transform.position, spawnAreas[0].transform.rotation);
     }
 
     public void AddPlayer(PlayerController player)
@@ -56,19 +58,6 @@ public class ArenaManager : MonoBehaviour
         players.Add(player);
         numAlive++;
 
-        foreach(var pair in startSpots)
-        {
-            if (!pair.Value)
-            {
-                player.transform.position = pair.Key.position;
-                player.transform.rotation = pair.Key.rotation;
-
-                // mark spot as filled
-                startSpots[pair.Key] = true;
-                break;
-            }
-        }
-
         // if required number of players has been reached, start the game
         if (numAlive == requiredPlayerCount)
         {
@@ -78,6 +67,12 @@ public class ArenaManager : MonoBehaviour
 
     private void StartGame()
     {
+        // enable all players
+        foreach (PlayerController P in players)
+        {
+            P.enabled = true;
+        }
+
         gameStart = true;
     }
 

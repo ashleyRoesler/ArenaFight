@@ -31,6 +31,9 @@ public class Attack : NetworkedBehaviour
 
         // get magic projectile
         projectile = Resources.Load("magic projectile") as GameObject;
+
+        // make sure player cannot attack before game starts
+        enabled = false;
     }
 
     // Update is called once per frame
