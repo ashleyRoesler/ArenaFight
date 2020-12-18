@@ -20,7 +20,10 @@ public class ArenaManager : NetworkedBehaviour
     private bool gameOver = false;              // true if only one player is left
     public static bool gameStart = false;       // true if max player count reached (game is ready to start)
 
-    private static bool isGameHost = false;         // true if local player is game host
+    private static bool isGameHost = false;     // true if local player is game host
+
+    public delegate void UpdateWait(int current, int needed);
+    public static event UpdateWait OnUpdateWait;
 
     /*=====================================================
                         JOINING GAME
@@ -128,6 +131,9 @@ public class ArenaManager : NetworkedBehaviour
 
         players.Add(player);
         numAlive++;
+
+        // update waiting text
+        OnUpdateWait(numAlive, requiredPlayerCount);
 
         // if required number of players has been reached, start the game
         if (numAlive == requiredPlayerCount)

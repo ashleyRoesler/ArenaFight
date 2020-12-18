@@ -96,12 +96,6 @@ public class PlayerController : NetworkedBehaviour
     {
         // make sure sword disappears on death or victory
         attack.ToggleSword(false);
-
-
-        if (!IsLocalPlayer)
-        {
-            Debug.Log("disable");
-        }
     }
 
     public Transform GetCamTransform()
