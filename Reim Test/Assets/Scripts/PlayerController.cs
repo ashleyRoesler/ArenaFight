@@ -4,40 +4,38 @@ using MLAPI;
 public class PlayerController : NetworkedBehaviour
 {
     [Header("References")]
-    private CharacterController controller;     // player controller reference
-    public Animator anim;                       // animator reference 
     [SerializeField]
-    private GameObject localCam;                // player camera reference
+    private GameObject localCam;                                // player camera reference
     [SerializeField]
-    private Transform lookAt;                   // player camera's focus
+    private Transform lookAt;                                   // player camera's focus
 
-    private float turnSmoothVelocity;           // current smooth velocity
+    private CharacterController controller;                     // player controller reference
 
-    [Header("Player Health")]
-    public Health HP;                           // player's health information
+    [HideInInspector]
+    public Health HP;                                           // player's health information
 
-    [Header("Player Attack")]
-    public Attack attack;                       // player's attack information
+    [HideInInspector]
+    public Animator anim;                                       // animator reference
 
-    public delegate void JoinGame(PlayerController player);
+    [HideInInspector]
+    public Attack attack;                                       // player's attack information
+
+    private float turnSmoothVelocity;                           // current smooth velocity
+
+    public delegate void JoinGame(PlayerController player);     // used to add player to arena manager
     public static event JoinGame OnJoin;
 
-    private void OnEnable()
-    {
-        if (attack)
-        {
-            attack.enabled = true;
-        }
-    }
-
-    void Start()
+    #region Initialization
+    private void Start()
     {
         // tell the Arena Manager that you have joined the game
-        OnJoin(this);
+        OnJoin?.Invoke(this);
 
         // get reference to components
         anim = gameObject.GetComponent<Animator>();
         controller = gameObject.GetComponent<CharacterController>();
+        HP = gameObject.GetComponent<Health>();
+        attack = gameObject.GetComponent<Attack>();
 
         // turn off camera and component control for non-local players
         if (!IsLocalPlayer)
@@ -45,26 +43,17 @@ public class PlayerController : NetworkedBehaviour
             localCam.SetActive(false);
             controller.enabled = false;
         }
-
-        // make sure player cannot move before the game starts
-        if (!ArenaManager.gameStart)
-        {
-            enabled = false;
-        }
     }
+    #endregion
 
-    // Update is called once per frame
+    #region Movement
     void Update()
     {
-        // don't move if you are attacking or not local player
-        if (attack.IsAttacking() || !IsLocalPlayer)
+        // don't move if you are attacking, not the local player, or if the game hasn't started
+        if (attack.IsAttacking() || !IsLocalPlayer || !ArenaManager.gameHasStarted)
         {
             return;
         }
-
-        /*=====================================================
-                              MOVEMENT
-        =====================================================*/
 
         // gather movement input information
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -78,12 +67,12 @@ public class PlayerController : NetworkedBehaviour
 
             // rotate player to make them look where they are going (based on camera rotation as well)
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + localCam.transform.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, Stats.sSmoothT);
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, Stats.instance.turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             // move player based on input and camera rotation
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * Stats.sSpeed * Time.deltaTime);
+            controller.Move(moveDir.normalized * Stats.instance.speed * Time.deltaTime);
         }
         else
         {
@@ -91,7 +80,9 @@ public class PlayerController : NetworkedBehaviour
             anim.SetBool("IsRunning", false);
         }
     }
+    #endregion
 
+    #region Misc. Utility
     private void OnDisable()
     {
         // make sure sword disappears on death or victory
@@ -102,4 +93,5 @@ public class PlayerController : NetworkedBehaviour
     {
         return localCam.transform;
     }
+    #endregion
 }

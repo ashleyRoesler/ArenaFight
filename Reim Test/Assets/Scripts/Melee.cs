@@ -18,11 +18,11 @@ public class Melee : MonoBehaviour
             // apply damage to the player that was hit
             if (player.GetSwordToggle())    // sword damage
             {
-                other.gameObject.GetComponent<PlayerController>().HP.TakeDamage(Stats.swordP);
+                other.gameObject.GetComponent<PlayerController>().HP.TakeDamage(Stats.instance.swordPower);
             }
             else                           // punch damage
             {
-                other.gameObject.GetComponent<PlayerController>().HP.TakeDamage(Stats.punchP);
+                other.gameObject.GetComponent<PlayerController>().HP.TakeDamage(Stats.instance.punchPower);
             }
         }
     }

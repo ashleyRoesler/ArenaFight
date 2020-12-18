@@ -6,28 +6,26 @@ using MLAPI.Spawning;
 
 public class ArenaManager : NetworkedBehaviour
 {
-    private List<PlayerController> players;     // list of current players
-    private List<GameObject> spawnAreas;        // list of player spawn areas
+    private static bool isGameHost = false;                         // true if local player is game host
+
+    private List<PlayerController> players;                         // list of current players
+    private List<GameObject> spawnAreas;                            // list of player spawn areas
     
     [Header("Required Player Count")]
-    public int requiredPlayerCount = 3;         // number of players needed to start the game
+    public int requiredPlayerCount = 3;                             // number of players needed to start the game
 
     [SerializeField]
-    private GameObject victoryCanvas;           // reference to victory screen
+    private GameObject victoryCanvas;                               // reference to victory screen
 
-    public static int numAlive = 0;             // number of players left alive
+    public static int numAlive = 0;                                 // number of players left alive
 
-    private bool gameOver = false;              // true if only one player is left
-    public static bool gameStart = false;       // true if max player count reached (game is ready to start)
+    private bool gameOver = false;                                  // true if only one player is left
+    public static bool gameHasStarted = false;                      // true if number of players equals the required amount
 
-    private static bool isGameHost = false;     // true if local player is game host
-
-    public delegate void UpdateWait(int current, int needed);
+    public delegate void UpdateWait(int current, int needed);       // used to update the waiting counter text
     public static event UpdateWait OnUpdateWait;
 
-    /*=====================================================
-                        JOINING GAME
-    =====================================================*/
+    #region Networking
     public static void BeHost(bool yes)
     {
         isGameHost = yes;
@@ -58,36 +56,30 @@ public class ArenaManager : NetworkedBehaviour
         Transform spawn = new GameObject().transform;
 
         // if players are still needed, accept the connection
+        // note: numAlive starts at 1 because the host has already spawned
         if (numAlive < requiredPlayerCount)
         {
             approve = true;
             createPlayerObject = true;
 
-            // for spawning different player prefabs at different locations
-            switch (numAlive)
+            // spawning different player prefabs at different locations
+            if (numAlive < spawnAreas.Count)
             {
-                case 1: // player 2
-                    prefabHash = SpawnManager.GetPrefabHashFromGenerator("PlayerCam 2");
-                    spawn = spawnAreas[1].transform;
-                    break;
-                case 2: // player 3
-                    prefabHash = SpawnManager.GetPrefabHashFromGenerator("PlayerCam 3");
-                    spawn = spawnAreas[2].transform;
-                    break;
-                default:
-                    prefabHash = null;
-                    break;
+                prefabHash = SpawnManager.GetPrefabHashFromGenerator("PlayerCam " + (numAlive + 1));
+                spawn = spawnAreas[numAlive].transform;
+            }
+            else
+            {
+                Debug.LogError("Not enough spawn areas");
             }
         }
 
         // reject or accept connection, spawning desired player at desired location
         callback(createPlayerObject, prefabHash, approve, spawn.position, spawn.rotation);
     }
+    #endregion
 
-    /*=====================================================
-                      GAME INITIALIZATION
-    =====================================================*/
-
+    #region Game Initialization
     private void OnEnable()
     {
         PlayerController.OnJoin += AddPlayer;
@@ -98,7 +90,7 @@ public class ArenaManager : NetworkedBehaviour
         PlayerController.OnJoin -= AddPlayer;
     }
 
-    void Awake()
+    private void Awake()
     {
         // get all spawn locations and initialize start spots
         spawnAreas = GameObject.FindGameObjectsWithTag("Spawn").ToList();
@@ -108,7 +100,7 @@ public class ArenaManager : NetworkedBehaviour
 
         // reset static variables
         numAlive = 0;
-        gameStart = false;
+        gameHasStarted = false;
 
         // start game
         if (isGameHost)
@@ -124,7 +116,7 @@ public class ArenaManager : NetworkedBehaviour
     public void AddPlayer(PlayerController player)
     {
         // don't add any players if the game has already started
-        if (gameStart)
+        if (gameHasStarted)
         {
             return;
         }
@@ -133,26 +125,24 @@ public class ArenaManager : NetworkedBehaviour
         numAlive++;
 
         // update waiting text
-        OnUpdateWait(numAlive, requiredPlayerCount);
+        OnUpdateWait?.Invoke(numAlive, requiredPlayerCount);
 
         // if required number of players has been reached, start the game
         if (numAlive == requiredPlayerCount)
         {
-            StartGame();
+            // enable all players
+            foreach (PlayerController P in players)
+            {
+                P.enabled = true;
+                P.attack.enabled = true;
+            }
+
+            gameHasStarted = true;
         }
     }
+    #endregion
 
-    private void StartGame()
-    {
-        // enable all players
-        foreach (PlayerController P in players)
-        {
-            P.enabled = true;
-        }
-
-        gameStart = true;
-    }
-
+    #region Win Condition
     /*=====================================================
                          WIN CONDITION
     =====================================================*/
@@ -160,7 +150,7 @@ public class ArenaManager : NetworkedBehaviour
     void Update()
     {
         // check for win condition (one player is left standing)
-        if (gameStart && !gameOver && numAlive == 1)
+        if (gameHasStarted && !gameOver && numAlive == 1)
         {
             gameOver = true;
 
@@ -183,4 +173,5 @@ public class ArenaManager : NetworkedBehaviour
             }
         }
     }
+    #endregion
 }

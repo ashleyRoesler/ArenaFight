@@ -4,7 +4,6 @@ public class Health : MonoBehaviour
 {
     [SerializeField]
     private PlayerController player;    // player reference
-
     [SerializeField]
     private HealthBar healthBar;        // health bar reference
 
@@ -12,11 +11,10 @@ public class Health : MonoBehaviour
 
     private bool dead = false;          // true if current health reaches 0
 
-    // Start is called before the first frame update
     void Start()
     {
-        currentHealth = Stats.maxHP;
-        healthBar.SetMaxHealth(Stats.maxHP);
+        currentHealth = Stats.instance.maxHealth;
+        healthBar.SetMaxHealth(currentHealth);
     }
 
     public bool IsDead()

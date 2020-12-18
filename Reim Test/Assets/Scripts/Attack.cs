@@ -21,73 +21,86 @@ public class Attack : NetworkedBehaviour
 
     private bool swordOn = false;       // true if sword drawn
 
-    // Start is called before the first frame update
-    void Start()
+    #region Initialization
+    private void Start()
     {
         // set attack speeds
-        player.anim.SetFloat("Punch Speed", Stats.punchS);
-        player.anim.SetFloat("Sword Speed", Stats.swordS);
-        player.anim.SetFloat("Magic Speed", Stats.magicS);
+        player.anim.SetFloat("Punch Speed", Stats.instance.punchSpeed);
+        player.anim.SetFloat("Sword Speed", Stats.instance.swordSpeed);
+        player.anim.SetFloat("Magic Speed", Stats.instance.magicSpeed);
 
         // get magic projectile
         projectile = Resources.Load("magic projectile") as GameObject;
-
-        // make sure player cannot attack before game starts
-        enabled = false;
     }
+    #endregion
 
-    // Update is called once per frame
+    #region Do Attack
     void Update()
     {
-        // make sure the player isn't already attacking
-        if (!attacking && IsLocalPlayer)
+        // don't attack if you are already attacking, not the local player, or if the game hasn't started
+        if (attacking || !IsLocalPlayer || !ArenaManager.gameHasStarted)
         {
-            // sheath/draw sword
-            if (Input.GetKeyDown(KeyCode.F))
+            return;
+        }
+
+        // sheath/draw sword
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ToggleSword(!swordOn);
+        }
+
+        // punch or swing sword
+        if (Input.GetMouseButtonDown(0) && !attacking)
+        {
+            // set attacking to true
+            player.anim.SetBool("Attacking", true);
+            attacking = true;
+
+            // set animation and attack type
+            player.anim.SetInteger("Attack Type", attackId);
+
+            // switch punches or reset sword
+            switch (attackId)
             {
-                ToggleSword(!swordOn);
+                case 0:
+                    attackId = 1;
+                    punch.GetComponent<Melee>().ResetCollide();
+                    break;
+                case 1:
+                    attackId = 0;
+                    punch.GetComponent<Melee>().ResetCollide();
+                    break;
+                case 2:
+                    sword.GetComponent<Melee>().ResetCollide();
+                    break;
             }
+        }
 
-            // punch or swing sword
-            if (Input.GetMouseButtonDown(0) && !attacking)
-            {
-                // set attacking to true
-                player.anim.SetBool("Attacking", true);
-                attacking = true;
+        // fire magic
+        if (Input.GetKeyDown(KeyCode.Q) && !attacking)
+        {
+            // set attacking to true
+            player.anim.SetBool("Attacking", true);
+            attacking = true;
 
-                // set animation and attack type
-                player.anim.SetInteger("Attack Type", attackId);
-
-                // switch punches or reset sword
-                switch (attackId)
-                {
-                    case 0:
-                        attackId = 1;
-                        punch.GetComponent<Melee>().ResetCollide();
-                        break;
-                    case 1:
-                        attackId = 0;
-                        punch.GetComponent<Melee>().ResetCollide();
-                        break;
-                    case 2:
-                        sword.GetComponent<Melee>().ResetCollide();
-                        break;
-                }
-            }
-
-            // fire magic
-            if (Input.GetKeyDown(KeyCode.Q) && !attacking)
-            {
-                // set attacking to true
-                player.anim.SetBool("Attacking", true);
-                attacking = true;
-
-                // set animation
-                player.anim.SetInteger("Attack Type", 3);
-            }
+            // set animation
+            player.anim.SetInteger("Attack Type", 3);
         }
     }
 
+    public void FireMagic()
+    {
+        // spawn magic projectile
+        GameObject magic = Instantiate(projectile) as GameObject;
+        magic.transform.position = hand.transform.position;
+
+        // fire projectile
+        Rigidbody rb = magic.GetComponent<Rigidbody>();
+        rb.AddForce(player.transform.forward * Stats.instance.projectileSpeed, ForceMode.Force);
+    }
+    #endregion
+
+    #region Toggle Attack
     public void EndAttack()
     {
         // turn animation and attacking off
@@ -109,16 +122,6 @@ public class Attack : NetworkedBehaviour
         {
             ToggleSwordCollision();
         }
-    }
-
-    public bool IsAttacking()
-    {
-        return attacking;
-    }
-
-    public bool GetSwordToggle()
-    {
-        return swordOn;
     }
 
     public void ToggleSword(bool onf)
@@ -145,15 +148,17 @@ public class Attack : NetworkedBehaviour
     {
         punch.GetComponent<BoxCollider>().enabled = !punch.GetComponent<BoxCollider>().enabled;
     }
+    #endregion
 
-    public void FireMagic()
+    #region Status Check
+    public bool IsAttacking()
     {
-        // spawn magic projectile
-        GameObject magic = Instantiate(projectile) as GameObject;
-        magic.transform.position = hand.transform.position;
-
-        // fire projectile
-        Rigidbody rb = magic.GetComponent<Rigidbody>();
-        rb.AddForce(player.transform.forward * Stats.projectileS, ForceMode.Force);
+        return attacking;
     }
+
+    public bool GetSwordToggle()
+    {
+        return swordOn;
+    }
+    #endregion
 }

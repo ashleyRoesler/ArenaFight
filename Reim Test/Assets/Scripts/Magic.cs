@@ -13,7 +13,7 @@ public class Magic : MonoBehaviour
             hasCollide = true;
 
             // apply damage to the player that was hit
-            other.gameObject.GetComponent<PlayerController>().HP.TakeDamage(Stats.magicP);
+            other.gameObject.GetComponent<PlayerController>().HP.TakeDamage(Stats.instance.magicPower);
         }
 
         // destroy magic projectile on collision
