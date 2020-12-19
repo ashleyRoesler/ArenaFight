@@ -62,6 +62,9 @@ public class ArenaManager : NetworkedBehaviour
         {
             approve = true;
             createPlayerObject = true;
+ 
+            Debug.Log(numAlive);
+            Debug.Log(spawnAreas.Count);
 
             // spawning different player prefabs at different locations
             if (numAlive < spawnAreas.Count)
@@ -78,21 +81,25 @@ public class ArenaManager : NetworkedBehaviour
         // reject or accept connection, spawning desired player at desired location
         callback(createPlayerObject, prefabHash, approve, spawn.position, spawn.rotation);
     }
+
+    private void RemoveCallback()
+    {
+        NetworkingManager.Singleton.ConnectionApprovalCallback -= ApprovalCheck;
+    }
+
     #endregion
 
     #region Game Initialization
     private void OnEnable()
     {
         PlayerController.OnJoin += AddPlayer;
+        MainMenu.OnRestartCallback += RemoveCallback;
     }
 
     private void OnDisable()
     {
         PlayerController.OnJoin -= AddPlayer;
-    }
-
-    private void OnDestroy()
-    {
+        MainMenu.OnRestartCallback -= RemoveCallback;
         spawnAreas.Clear();
     }
 

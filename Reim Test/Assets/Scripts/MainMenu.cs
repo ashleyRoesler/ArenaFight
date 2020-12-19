@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class MainMenu : NetworkedBehaviour
 {
+    public delegate void RestartCallback();
+    public static event RestartCallback OnRestartCallback;
+
     public void ReplayGame()
     {
         Disconnect();
@@ -20,6 +23,9 @@ public class MainMenu : NetworkedBehaviour
 
     private void Disconnect()
     {
+        // remove approval check callback from networking manager
+        OnRestartCallback?.Invoke();
+
         if (IsHost)
         {
             // if the host disconnects, make sure to disconnect all clients
