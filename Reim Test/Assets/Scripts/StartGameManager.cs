@@ -1,14 +1,8 @@
 ﻿using UnityEngine.SceneManagement;
 using MLAPI;
-using UnityEngine;
 
 public class StartGameManager : NetworkedBehaviour
 {
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     public void HostGame()
     {
         SceneManager.LoadScene("Arena");

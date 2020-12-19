@@ -91,6 +91,11 @@ public class ArenaManager : NetworkedBehaviour
         PlayerController.OnJoin -= AddPlayer;
     }
 
+    private void OnDestroy()
+    {
+        spawnAreas.Clear();
+    }
+
     private void Awake()
     {
         // get all spawn locations and initialize start spots
@@ -128,6 +133,7 @@ public class ArenaManager : NetworkedBehaviour
         // update waiting text (waiting script starts game)
         OnUpdateWait?.Invoke(numAlive, requiredPlayerCount);
     }
+
     #endregion
 
     #region Win Condition

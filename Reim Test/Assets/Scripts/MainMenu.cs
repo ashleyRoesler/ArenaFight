@@ -34,7 +34,7 @@ public class MainMenu : NetworkedBehaviour
                     NetworkingManager.Singleton.DisconnectClient(clientIdList[i]);
                 }
             }
-
+          
             NetworkingManager.Singleton.StopHost();
         }
         else if (IsClient)
