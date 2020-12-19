@@ -7997,11 +7997,11 @@ MonoBehaviour:
   maxHealth: 100
   punchPower: 10
   swordPower: 20
-  magicPower: 15
-  punchSpeed: 2
-  swordSpeed: 1
+  magicPower: 30
+  punchSpeed: 2.4
+  swordSpeed: 1.2
   magicSpeed: 1.5
-  projectileSpeed: 10
+  projectileSpeed: 12
 --- !u!114 &405389334
 MonoBehaviour:
   m_ObjectHideFlags: 0
