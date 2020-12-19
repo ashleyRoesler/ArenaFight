@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using MLAPI;
 
-public class Health : MonoBehaviour
+public class Health : NetworkedBehaviour
 {
     [SerializeField]
     private PlayerController player;    // player reference

@@ -90,13 +90,16 @@ public class Attack : NetworkedBehaviour
 
     public void FireMagic()
     {
-        // spawn magic projectile
-        GameObject magic = Instantiate(projectile) as GameObject;
-        magic.transform.position = hand.transform.position;
+        if (IsHost)
+        {
+            // spawn magic projectile
+            GameObject magic = Instantiate(projectile, hand.transform.position, Quaternion.identity) as GameObject;
+            magic.GetComponent<NetworkedObject>().Spawn();
 
-        // fire projectile
-        Rigidbody rb = magic.GetComponent<Rigidbody>();
-        rb.AddForce(player.transform.forward * Stats.instance.projectileSpeed, ForceMode.Force);
+            // fire projectile
+            Rigidbody rb = magic.GetComponent<Rigidbody>();
+            rb.AddForce(player.transform.forward * Stats.instance.projectileSpeed, ForceMode.Force);
+        }
     }
     #endregion
 
