@@ -62,9 +62,6 @@ public class ArenaManager : NetworkedBehaviour
         {
             approve = true;
             createPlayerObject = true;
- 
-            Debug.Log(numAlive);
-            Debug.Log(spawnAreas.Count);
 
             // spawning different player prefabs at different locations
             if (numAlive < spawnAreas.Count)
