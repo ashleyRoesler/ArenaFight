@@ -26,7 +26,7 @@ public class ArenaManager : NetworkedBehaviour
     public delegate void UpdateWait(int current, int needed);       // used to update the waiting counter text
     public static event UpdateWait OnUpdateWait;
 
-    #region Networking
+    #region Pre-Game Networking
     public static void BeHost(bool yes)
     {
         isGameHost = yes;
