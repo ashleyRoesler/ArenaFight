@@ -9,6 +9,7 @@ public class Billboard : NetworkedBehaviour
     {
         if (IsLocalPlayer)
         {
+            // get the local player's camera transform
             localCam = gameObject.transform.parent.gameObject.GetComponent<PlayerController>().GetCamTransform();
 
         }
@@ -16,6 +17,7 @@ public class Billboard : NetworkedBehaviour
 
     void LateUpdate()
     {
+        // point the billboard at the camera
         transform.LookAt(transform.position + localCam.forward);
     }
 }

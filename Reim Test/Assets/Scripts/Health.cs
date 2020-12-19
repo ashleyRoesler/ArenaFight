@@ -12,6 +12,7 @@ public class Health : NetworkedBehaviour
 
     private bool dead = false;          // true if current health reaches 0
 
+    #region Initialization and Misc.
     void Start()
     {
         currentHealth = Stats.instance.maxHealth;
@@ -23,6 +24,13 @@ public class Health : NetworkedBehaviour
         return dead;
     }
 
+    public void DisableHPBar()
+    {
+        healthBar.gameObject.SetActive(false);
+    }
+    #endregion
+
+    #region Take Damage
     public void TakeDamage(int damage)
     {
         // make sure not already dead
@@ -53,9 +61,5 @@ public class Health : NetworkedBehaviour
             ArenaManager.numAlive--;
         }
     }
-
-    public void DisableHPBar()
-    {
-        healthBar.gameObject.SetActive(false);
-    }
+    #endregion
 }
