@@ -25,8 +25,10 @@ public class Magic : NetworkedBehaviour
             }
             else
             {
-                // apply host side
+                // apply client side
                 ApplyDamage(pcVictim);
+
+                // apply host side
                 InvokeServerRpc(SendDamageToHost, pcVictim);
             }
         }
