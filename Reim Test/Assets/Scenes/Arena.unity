@@ -7978,7 +7978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564e911f73c78694189bcf9e8dd2f375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredPlayerCount: 2
+  requiredPlayerCount: 3
   victoryCanvas: {fileID: 640987861}
 --- !u!114 &405389333
 MonoBehaviour:
