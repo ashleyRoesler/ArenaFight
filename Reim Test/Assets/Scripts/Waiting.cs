@@ -4,10 +4,10 @@ using UnityEngine;
 public class Waiting : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI waitingText;
+    private TextMeshProUGUI waitingText;        // waiting for players/countdown timer text
 
-    private float time = 4.0f;
-    private bool countdown = false;
+    private float time = 4.0f;                  // timer length in seconds
+    private bool countdown = false;             // true if countdown has begun
 
     private void OnEnable()
     {
@@ -36,16 +36,16 @@ public class Waiting : MonoBehaviour
     {
         if (countdown)
         {
-            if (time <= 3.0f && time > 0.0f)
+            if (time <= 3.0f && time > 1.0f)
             {
                 waitingText.text = time.ToString("0");
             }
-            else if (time <= 0.0f && time >= -1.0f)
+            else if (time <= 1.0f && time >= 0.0f)
             {
                 waitingText.text = "Fight!";
                 ArenaManager.gameHasStarted = true;
             }
-            else if (time < -1.0f)
+            else if (time < 0.0f)
             {
                 gameObject.SetActive(false);
                 return;

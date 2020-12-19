@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MLAPI;
 using MLAPI.Spawning;
+using TMPro;
 
 public class ArenaManager : NetworkedBehaviour
 {
@@ -57,7 +58,7 @@ public class ArenaManager : NetworkedBehaviour
 
         // if players are still needed, accept the connection
         // note: numAlive starts at 1 because the host has already spawned
-        if (numAlive < requiredPlayerCount)
+        if (numAlive < requiredPlayerCount && !gameHasStarted)
         {
             approve = true;
             createPlayerObject = true;
@@ -141,10 +142,6 @@ public class ArenaManager : NetworkedBehaviour
         {
             gameOver = true;
 
-            // display victory screen and turn cursor back on
-            victoryCanvas.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-
             // determine who is the winner
             foreach (PlayerController pc in players)
             {
@@ -156,6 +153,20 @@ public class ArenaManager : NetworkedBehaviour
 
                     // make health bar disappear
                     pc.HP.DisableHPBar();
+
+                    // display victory screen
+                    victoryCanvas.SetActive(true);
+
+                    string pcName = pc.transform.parent.name;
+                    pcName = pcName.Replace("(Clone)", string.Empty);
+                    pcName = pcName.Replace("Cam", string.Empty);
+
+                    victoryCanvas.GetComponentInChildren<TextMeshProUGUI>().text = pcName + " Wins!";
+
+                    // turn cursor back on
+                    Cursor.lockState = CursorLockMode.None;
+
+                    break;
                 }
             }
         }
