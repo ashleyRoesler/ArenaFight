@@ -14,23 +14,22 @@ public class Magic : NetworkedBehaviour
             // prevent double collisions
             hasCollide = true;
 
-            // apply damage to the player that was hit
-            ApplyDamage(other.gameObject);
+            // get the PlayerCam object (have to use a NetworkedObject)
+            GameObject pcVictim = other.transform.parent.gameObject;
 
             // make sure both client and host receive health update
             if (IsHost)
             {
                 // apply client side
-                InvokeClientRpcOnEveryone(SendDamageToClient, other.gameObject);
+                InvokeClientRpcOnEveryone(SendDamageToClient, pcVictim);
             }
             else
             {
                 // apply host side
-                InvokeServerRpc(SendDamageToHost, other.gameObject);
+                ApplyDamage(pcVictim);
+                InvokeServerRpc(SendDamageToHost, pcVictim);
             }
         }
-
-
 
         // destroy magic projectile on collision
         Destroy(gameObject);
@@ -38,7 +37,7 @@ public class Magic : NetworkedBehaviour
 
     private void ApplyDamage(GameObject victim)
     {
-        victim.GetComponent<Health>().TakeDamage(Stats.instance.magicPower);
+        victim.GetComponentInChildren<Health>().TakeDamage(Stats.instance.magicPower);
     }
 
     [ServerRPC]

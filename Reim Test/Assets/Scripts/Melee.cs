@@ -20,9 +20,6 @@ public class Melee : NetworkedBehaviour
             // get the PlayerCam object (have to use a NetworkedObject)
             GameObject pcVictim = other.transform.parent.gameObject;
 
-            // apply damage to the player that was hit
-            ApplyDamage(pcVictim);
-
             // make sure both client and host receive health update
             if (IsHost)
             {
@@ -31,6 +28,9 @@ public class Melee : NetworkedBehaviour
             }
             else
             {
+                // apply client side
+                ApplyDamage(pcVictim);
+
                 // apply host side
                 InvokeServerRpc(SendDamageToHost, pcVictim);
             }

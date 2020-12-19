@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using MLAPI;
+using MLAPI.Messaging;
 
 public class Attack : NetworkedBehaviour
 {
@@ -47,6 +48,18 @@ public class Attack : NetworkedBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             ToggleSword(!swordOn);
+
+            // make sure sword is toggled across both host and clients
+            if (IsHost)
+            {
+                // apply client side
+                InvokeClientRpcOnEveryone(SendToggleToClient, swordOn);
+            }
+            else
+            {
+                // apply host side
+                InvokeServerRpc(SendToggleToHost, swordOn);
+            }
         }
 
         // punch or swing sword
@@ -140,6 +153,18 @@ public class Attack : NetworkedBehaviour
         {
             attackId = 0;
         }
+    }
+
+    [ServerRPC]
+    private void SendToggleToHost(bool onf)
+    {
+        ToggleSword(onf);
+    }
+
+    [ClientRPC]
+    private void SendToggleToClient(bool onf)
+    {
+        ToggleSword(onf);
     }
 
     public void ToggleSwordCollision()
