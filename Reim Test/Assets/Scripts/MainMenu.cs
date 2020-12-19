@@ -28,7 +28,11 @@ public class MainMenu : NetworkedBehaviour
 
             for (int i = 0; i < cCount; i++)
             {
-                NetworkingManager.Singleton.DisconnectClient(clientIdList[i]);
+                // make sure the client hasn't already disconnected
+                if (NetworkingManager.Singleton.ConnectedClients.ContainsKey(clientIdList[i]))
+                {
+                    NetworkingManager.Singleton.DisconnectClient(clientIdList[i]);
+                }
             }
 
             NetworkingManager.Singleton.StopHost();
