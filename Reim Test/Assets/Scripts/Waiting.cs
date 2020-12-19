@@ -43,6 +43,7 @@ public class Waiting : MonoBehaviour
             else if (time <= 0.0f && time >= -1.0f)
             {
                 waitingText.text = "Fight!";
+                ArenaManager.gameHasStarted = true;
             }
             else if (time < -1.0f)
             {

@@ -124,21 +124,8 @@ public class ArenaManager : NetworkedBehaviour
         players.Add(player);
         numAlive++;
 
-        // update waiting text
+        // update waiting text (waiting script starts game)
         OnUpdateWait?.Invoke(numAlive, requiredPlayerCount);
-
-        // if required number of players has been reached, start the game
-        if (numAlive == requiredPlayerCount)
-        {
-            // enable all players
-            foreach (PlayerController P in players)
-            {
-                P.enabled = true;
-                P.attack.enabled = true;
-            }
-
-            gameHasStarted = true;
-        }
     }
     #endregion
 
