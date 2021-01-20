@@ -57,8 +57,6 @@ public class AttackController : NetworkedBehaviour
 
         // get magic projectile
         _projectile = Resources.Load("magic projectile") as Attack;
-        _projectile.SetPlayer(this);
-        _projectile.SetPower(_magicPower);
     }
     #endregion
 
@@ -135,6 +133,8 @@ public class AttackController : NetworkedBehaviour
             // spawn magic projectile
             Attack magic = Instantiate(_projectile, _hand.transform.position, Quaternion.identity) as Attack;
             magic.GetComponent<NetworkedObject>().Spawn();
+            magic.SetPlayer(this);
+            magic.SetPower(_magicPower);
 
             // fire projectile
             Rigidbody rb = magic.GetComponent<Rigidbody>();
