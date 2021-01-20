@@ -1,6 +1,6 @@
 # Arena Fight!
 
-This is my solution for the programming test provided by Reim Entertainment. It is a 3-player, local multiplayer game. Each player controls one fighter in the arena, and last one standing wins! (More information about controls can be found in the game's main menu.)
+This is a small practice project I made to learn how to create an MLAPI multiplayer game in Unity. It is a 3-player, local multiplayer game. Each player controls one fighter in the arena, and last one standing wins! (More information about controls can be found in the game's main menu.)
 
 **About Building for Local Networks:**
 
