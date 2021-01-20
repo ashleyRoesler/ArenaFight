@@ -4,31 +4,31 @@ using MLAPI;
 public class Health : NetworkedBehaviour
 {
     [SerializeField]
-    private PlayerController player;    
+    private PlayerController _player;    
     [SerializeField]
-    private HealthBar healthBar;        
+    private HealthBar _healthBar;        
 
     [SerializeField]
-    private int maxHealth = 100;
-    private int currentHealth;          
+    private int _maxHealth = 100;
+    private int _currentHealth;          
 
-    private bool dead = false;          // true if current health reaches 0
+    private bool _dead = false;          // true if current health reaches 0
 
     #region Initialization and Misc.
     void Start()
     {
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(currentHealth);
+        _currentHealth = _maxHealth;
+        _healthBar.SetMaxHealth(_currentHealth);
     }
 
     public bool IsDead()
     {
-        return dead;
+        return _dead;
     }
 
     public void DisableHPBar()
     {
-        healthBar.gameObject.SetActive(false);
+        _healthBar.gameObject.SetActive(false);
     }
     #endregion
 
@@ -36,21 +36,21 @@ public class Health : NetworkedBehaviour
     public void TakeDamage(int damage)
     {
         // make sure not already dead
-        if (dead)
+        if (_dead)
         {
             return;
         }
 
         // decrease health
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        _currentHealth -= damage;
+        _healthBar.SetHealth(_currentHealth);
 
         // die (play animation and turn off script)
-        if (currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
-            dead = true;
-            player.anim.SetBool("IsDead", true);
-            player.enabled = false;
+            _dead = true;
+            _player.anim.SetBool("IsDead", true);
+            _player.enabled = false;
 
             // make health bar disappear
             DisableHPBar();
@@ -60,7 +60,7 @@ public class Health : NetworkedBehaviour
             gameObject.GetComponent<CharacterController>().enabled = false;
 
             // update arena manager
-            ArenaManager.numAlive--;
+            ArenaManager.NumAlive--;
         }
     }
     #endregion

@@ -4,10 +4,10 @@ using UnityEngine;
 public class WaitManager : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI waitingText;        // waiting for players/countdown timer text
+    private TextMeshProUGUI _waitingText;        // waiting for players/countdown timer text
 
-    private float time = 4.0f;                  // timer length in seconds
-    private bool countdown = false;             // true if countdown has begun
+    private float _time = 4.0f;                  // timer length in seconds
+    private bool _countdown = false;             // true if countdown has begun
 
     private void OnEnable()
     {
@@ -23,34 +23,34 @@ public class WaitManager : MonoBehaviour
     {
         if (current != needed)
         {
-            waitingText.text = "Waiting... " + current + "/" + needed + " players";
+            _waitingText.text = "Waiting... " + current + "/" + needed + " players";
         }
         else // switch to fight text
         {
-            waitingText.text = "Get Ready!";
-            countdown = true;
+            _waitingText.text = "Get Ready!";
+            _countdown = true;
         }
     }
 
     private void Update()
     {
-        if (countdown)
+        if (_countdown)
         {
-            if (time <= 3.0f && time > 1.0f)
+            if (_time <= 3.0f && _time > 1.0f)
             {
-                waitingText.text = time.ToString("0");
+                _waitingText.text = _time.ToString("0");
             }
-            else if (time <= 1.0f && time >= 0.0f)
+            else if (_time <= 1.0f && _time >= 0.0f)
             {
-                waitingText.text = "Fight!";
-                ArenaManager.gameHasStarted = true;
+                _waitingText.text = "Fight!";
+                ArenaManager.GameHasStarted = true;
             }
-            else if (time < 0.0f)
+            else if (_time < 0.0f)
             {
                 gameObject.SetActive(false);
                 return;
             }
-            time -= Time.deltaTime;
+            _time -= Time.deltaTime;
         }
     }
 }

@@ -7,21 +7,21 @@ using TMPro;
 
 public class ArenaManager : NetworkedBehaviour
 {
-    private static bool isGameHost = false;                         // true if local player is game host
+    private static bool _isGameHost = false;                         // true if local player is game host
 
-    private List<PlayerController> players;                         // list of current players
-    private List<GameObject> spawnAreas;                            // list of player spawn areas
+    private List<PlayerController> _players;                         // list of current players
+    private List<GameObject> _spawnAreas;                            // list of player spawn areas
     
     [Header("Required Player Count")]
-    public int requiredPlayerCount = 3;                             
+    public int RequiredPlayerCount = 3;                             
 
     [SerializeField]
-    private GameObject victoryCanvas;                               
+    private GameObject _victoryCanvas;                               
 
-    public static int numAlive = 0;                                 // number of players left alive
+    public static int NumAlive = 0;                                 // number of players left alive
 
-    private bool gameOver = false;                                  // true if only one player is left
-    public static bool gameHasStarted = false;                      // true if number of players equals the required amount
+    private bool _gameOver = false;                                 // true if only one player is left
+    public static bool GameHasStarted = false;                      // true if number of players equals the required amount
 
     public delegate void UpdateWait(int current, int needed);       
     public static event UpdateWait OnUpdateWait;
@@ -29,13 +29,13 @@ public class ArenaManager : NetworkedBehaviour
     #region Pre-Game Networking
     public static void BeHost(bool yes)
     {
-        isGameHost = yes;
+        _isGameHost = yes;
     }
 
     private void StartHost()
     {
         NetworkingManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
-        NetworkingManager.Singleton.StartHost(spawnAreas[0].transform.position, spawnAreas[0].transform.rotation);
+        NetworkingManager.Singleton.StartHost(_spawnAreas[0].transform.position, _spawnAreas[0].transform.rotation);
 
         // turn cursor off
         Cursor.lockState = CursorLockMode.Locked;
@@ -58,16 +58,16 @@ public class ArenaManager : NetworkedBehaviour
 
         // if players are still needed, accept the connection
         // note: numAlive starts at 1 because the host has already spawned
-        if (numAlive < requiredPlayerCount && !gameHasStarted)
+        if (NumAlive < RequiredPlayerCount && !GameHasStarted)
         {
             approve = true;
             createPlayerObject = true;
 
             // spawning different player prefabs at different locations
-            if (numAlive < spawnAreas.Count)
+            if (NumAlive < _spawnAreas.Count)
             {
-                prefabHash = SpawnManager.GetPrefabHashFromGenerator("PlayerCam " + (numAlive + 1));
-                spawn = spawnAreas[numAlive].transform;
+                prefabHash = SpawnManager.GetPrefabHashFromGenerator("PlayerCam " + (NumAlive + 1));
+                spawn = _spawnAreas[NumAlive].transform;
             }
             else
             {
@@ -97,23 +97,23 @@ public class ArenaManager : NetworkedBehaviour
     {
         PlayerController.OnJoin -= AddPlayer;
         MainMenu.OnRestartCallback -= RemoveCallback;
-        spawnAreas.Clear();
+        _spawnAreas.Clear();
     }
 
     private void Awake()
     {
         // get all spawn locations and initialize start spots
-        spawnAreas = GameObject.FindGameObjectsWithTag("Spawn").ToList();
+        _spawnAreas = GameObject.FindGameObjectsWithTag("Spawn").ToList();
 
         // initialize players list
-        players = new List<PlayerController>();
+        _players = new List<PlayerController>();
 
         // reset static variables
-        numAlive = 0;
-        gameHasStarted = false;
+        NumAlive = 0;
+        GameHasStarted = false;
 
         // start game
-        if (isGameHost)
+        if (_isGameHost)
         {
             StartHost();
         }
@@ -126,16 +126,16 @@ public class ArenaManager : NetworkedBehaviour
     public void AddPlayer(PlayerController player)
     {
         // don't add any players if the game has already started
-        if (gameHasStarted)
+        if (GameHasStarted)
         {
             return;
         }
 
-        players.Add(player);
-        numAlive++;
+        _players.Add(player);
+        NumAlive++;
 
         // update waiting text (waiting script starts game)
-        OnUpdateWait?.Invoke(numAlive, requiredPlayerCount);
+        OnUpdateWait?.Invoke(NumAlive, RequiredPlayerCount);
     }
 
     #endregion
@@ -148,12 +148,12 @@ public class ArenaManager : NetworkedBehaviour
     void Update()
     {
         // check for win condition (one player is left standing)
-        if (gameHasStarted && !gameOver && numAlive == 1)
+        if (GameHasStarted && !_gameOver && NumAlive == 1)
         {
-            gameOver = true;
+            _gameOver = true;
 
             // determine who is the winner
-            foreach (PlayerController pc in players)
+            foreach (PlayerController pc in _players)
             {
                 if (!pc.HP.IsDead())
                 {
@@ -165,13 +165,13 @@ public class ArenaManager : NetworkedBehaviour
                     pc.HP.DisableHPBar();
 
                     // display victory screen
-                    victoryCanvas.SetActive(true);
+                    _victoryCanvas.SetActive(true);
 
                     string pcName = pc.transform.parent.name;
                     pcName = pcName.Replace("(Clone)", string.Empty);
                     pcName = pcName.Replace("Cam", string.Empty);
 
-                    victoryCanvas.GetComponentInChildren<TextMeshProUGUI>().text = pcName + " Wins!";
+                    _victoryCanvas.GetComponentInChildren<TextMeshProUGUI>().text = pcName + " Wins!";
 
                     // turn cursor back on
                     Cursor.lockState = CursorLockMode.None;

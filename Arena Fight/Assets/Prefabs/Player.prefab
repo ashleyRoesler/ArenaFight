@@ -472,9 +472,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341ab2ee1f3ba4644b2584f5ebc8f396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 1495132888131179235}
-  fill: {fileID: 1495132887680692949}
-  gradient:
+  _slider: {fileID: 1495132888131179235}
+  _fill: {fileID: 1495132887680692949}
+  _gradient:
     serializedVersion: 2
     key0: {r: 0.8301887, g: 0.043075833, b: 0.13699257, a: 1}
     key1: {r: 1, g: 0.9145564, b: 0.1462264, a: 1}
@@ -625,14 +625,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904df28243cfe6e4293b198ece42020f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localCam: {fileID: 7982002709689499146, guid: 1e4eceeb9436d1e45844eb4396267a45,
+  _localCam: {fileID: 7982002709689499146, guid: 1e4eceeb9436d1e45844eb4396267a45,
     type: 3}
-  lookAt: {fileID: 1495132887519773878}
+  _lookAt: {fileID: 1495132887519773878}
   HP: {fileID: 1495132888529152230}
   anim: {fileID: 1495132888529152228}
   attack: {fileID: 1495132888529152229}
-  speed: 6
-  turnSmoothTime: 0.1
+  _speed: 6
+  _turnSmoothTime: 0.1
 --- !u!114 &1495132888529152230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,8 +645,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82d12d95cfc54a4bbaf9b4589aad240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1495132888529152225}
-  healthBar: {fileID: 1495132888131179234}
+  _player: {fileID: 1495132888529152225}
+  _healthBar: {fileID: 1495132888131179234}
+  _maxHealth: 100
 --- !u!114 &1495132888529152229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,17 +660,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5127f0b5613efe84598ced12560ac038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1495132888529152225}
-  sword: {fileID: 4473579461673747058}
-  hand: {fileID: 4457155198409230917}
-  punch: {fileID: 6363568397743185276}
-  punchPower: 10
-  swordPower: 20
-  magicPower: 15
-  punchSpeed: 1
-  swordSpeed: 1
-  magicSpeed: 1
-  projectileSpeed: 50
+  _player: {fileID: 1495132888529152225}
+  _sword: {fileID: 4473579461673747058}
+  _hand: {fileID: 4457155198409230917}
+  _punch: {fileID: 6363568397743185276}
+  _punchPower: 10
+  _swordPower: 20
+  _magicPower: 15
+  _punchSpeed: 1
+  _swordSpeed: 1
+  _magicSpeed: 1
+  _projectileSpeed: 50
 --- !u!114 &9134564819671458942
 MonoBehaviour:
   m_ObjectHideFlags: 0

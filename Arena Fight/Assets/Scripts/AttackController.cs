@@ -6,59 +6,59 @@ public class AttackController : NetworkedBehaviour
 {
     [Header("References")]
     [SerializeField]
-    private PlayerController player;    
+    private PlayerController _player;    
     [SerializeField]
-    private Attack sword;           
+    private Attack _sword;           
     [SerializeField]
-    private GameObject hand;            // player's hand, used for firing projectile
+    private GameObject _hand;            // player's hand, used for firing projectile
     [SerializeField]
-    private Attack punch;          
+    private Attack _punch;          
 
-    private Attack projectile;      
+    private Attack _projectile;      
 
-    private int attackId = 0;           // type of attack (punch or sword)
+    private int _attackId = 0;           // type of attack (punch or sword)
 
-    private bool attacking = false;     // false if attack animation is not playing
+    private bool _attacking = false;     // false if attack animation is not playing
 
-    private bool swordOn = false;       // true if sword drawn
+    private bool _swordOn = false;       // true if sword drawn
 
     [Header("Damage Values")]
     [SerializeField]
-    private int punchPower = 10;        // punch hp damage
+    private int _punchPower = 10;        // punch hp damage
     [SerializeField]
-    private int swordPower = 20;        // sword hp damage
+    private int _swordPower = 20;        // sword hp damage
     [SerializeField]
-    private int magicPower = 15;        // magic hp damage
+    private int _magicPower = 15;        // magic hp damage
 
     [Header("Attack Speeds")]
     [SerializeField]
-    private float punchSpeed = 1.0f;             // punch animation speed
+    private float _punchSpeed = 1.0f;             // punch animation speed
     [SerializeField]
-    private float swordSpeed = 1.0f;             // sword animation speed
+    private float _swordSpeed = 1.0f;             // sword animation speed
     [SerializeField]
-    private float magicSpeed = 1.0f;             // magic animation speed
+    private float _magicSpeed = 1.0f;             // magic animation speed
     [SerializeField]
-    private float projectileSpeed = 50.0f;       // magic projectile speed
+    private float _projectileSpeed = 50.0f;       // magic projectile speed
 
 
     #region Initialization
     private void Start()
     {
         // set attack speeds
-        player.anim.SetFloat("Punch Speed", punchSpeed);
-        player.anim.SetFloat("Sword Speed", swordSpeed);
-        player.anim.SetFloat("Magic Speed", magicSpeed);
+        _player.anim.SetFloat("Punch Speed", _punchSpeed);
+        _player.anim.SetFloat("Sword Speed", _swordSpeed);
+        _player.anim.SetFloat("Magic Speed", _magicSpeed);
 
         // set melee values
-        sword.SetPlayer(this);
-        sword.SetPower(swordPower);
-        punch.SetPlayer(this);
-        punch.SetPower(punchPower);
+        _sword.SetPlayer(this);
+        _sword.SetPower(_swordPower);
+        _punch.SetPlayer(this);
+        _punch.SetPower(_punchPower);
 
         // get magic projectile
-        projectile = Resources.Load("magic projectile") as Attack;
-        projectile.SetPlayer(this);
-        projectile.SetPower(magicPower);
+        _projectile = Resources.Load("magic projectile") as Attack;
+        _projectile.SetPlayer(this);
+        _projectile.SetPower(_magicPower);
     }
     #endregion
 
@@ -66,7 +66,7 @@ public class AttackController : NetworkedBehaviour
     void Update()
     {
         // don't attack if you are already attacking, not the local player, or if the game hasn't started
-        if (attacking || !IsLocalPlayer || !ArenaManager.gameHasStarted)
+        if (_attacking || !IsLocalPlayer || !ArenaManager.GameHasStarted)
         {
             return;
         }
@@ -74,57 +74,57 @@ public class AttackController : NetworkedBehaviour
         // sheath/draw sword
         if (Input.GetKeyDown(KeyCode.F))
         {
-            ToggleSword(!swordOn);
+            ToggleSword(!_swordOn);
 
             // make sure sword is toggled across both host and clients
             if (IsHost)
             {
                 // apply client side
-                InvokeClientRpcOnEveryone(SendToggleToClient, swordOn);
+                InvokeClientRpcOnEveryone(SendToggleToClient, _swordOn);
             }
             else
             {
                 // apply host side
-                InvokeServerRpc(SendToggleToHost, swordOn);
+                InvokeServerRpc(SendToggleToHost, _swordOn);
             }
         }
 
         // punch or swing sword
-        if (Input.GetMouseButtonDown(0) && !attacking)
+        if (Input.GetMouseButtonDown(0) && !_attacking)
         {
             // set attacking to true
-            player.anim.SetBool("Attacking", true);
-            attacking = true;
+            _player.anim.SetBool("Attacking", true);
+            _attacking = true;
 
             // set animation and attack type
-            player.anim.SetInteger("Attack Type", attackId);
+            _player.anim.SetInteger("Attack Type", _attackId);
 
             // switch punches or reset sword
-            switch (attackId)
+            switch (_attackId)
             {
                 case 0:
-                    attackId = 1;
-                    punch.GetComponent<Attack>().ResetCollide();
+                    _attackId = 1;
+                    _punch.GetComponent<Attack>().ResetCollide();
                     break;
                 case 1:
-                    attackId = 0;
-                    punch.GetComponent<Attack>().ResetCollide();
+                    _attackId = 0;
+                    _punch.GetComponent<Attack>().ResetCollide();
                     break;
                 case 2:
-                    sword.GetComponent<Attack>().ResetCollide();
+                    _sword.GetComponent<Attack>().ResetCollide();
                     break;
             }
         }
 
         // fire magic
-        if (Input.GetKeyDown(KeyCode.Q) && !attacking)
+        if (Input.GetKeyDown(KeyCode.Q) && !_attacking)
         {
             // set attacking to true
-            player.anim.SetBool("Attacking", true);
-            attacking = true;
+            _player.anim.SetBool("Attacking", true);
+            _attacking = true;
 
             // set animation
-            player.anim.SetInteger("Attack Type", 3);
+            _player.anim.SetInteger("Attack Type", 3);
         }
     }
 
@@ -133,12 +133,12 @@ public class AttackController : NetworkedBehaviour
         if (IsHost)
         {
             // spawn magic projectile
-            Attack magic = Instantiate(projectile, hand.transform.position, Quaternion.identity) as Attack;
+            Attack magic = Instantiate(_projectile, _hand.transform.position, Quaternion.identity) as Attack;
             magic.GetComponent<NetworkedObject>().Spawn();
 
             // fire projectile
             Rigidbody rb = magic.GetComponent<Rigidbody>();
-            rb.AddForce(player.transform.forward * projectileSpeed, ForceMode.Force);
+            rb.AddForce(_player.transform.forward * _projectileSpeed, ForceMode.Force);
         }
     }
     #endregion
@@ -147,21 +147,21 @@ public class AttackController : NetworkedBehaviour
     public void EndAttack()
     {
         // turn animation and attacking off
-        attacking = false;
-        player.anim.SetBool("Attacking", false);
+        _attacking = false;
+        _player.anim.SetBool("Attacking", false);
 
         // only turn off attack collision for melee, not magic
-        if (player.anim.GetInteger("Attack Type") == 3)
+        if (_player.anim.GetInteger("Attack Type") == 3)
         {
             return;
         }
 
         // turn attack collision off
-        if (attackId < 2)
+        if (_attackId < 2)
         {
             TogglePunchCollision();
         }
-        else if (attackId == 2)
+        else if (_attackId == 2)
         {
             ToggleSwordCollision();
         }
@@ -169,16 +169,16 @@ public class AttackController : NetworkedBehaviour
 
     public void ToggleSword(bool onf)
     {
-        sword.gameObject.SetActive(onf);
-        swordOn = onf;
+        _sword.gameObject.SetActive(onf);
+        _swordOn = onf;
 
         if (onf)    // turn sword on
         {
-            attackId = 2;
+            _attackId = 2;
         }
         else       // turn sword off
         {
-            attackId = 0;
+            _attackId = 0;
         }
     }
 
@@ -196,41 +196,41 @@ public class AttackController : NetworkedBehaviour
 
     public void ToggleSwordCollision()
     {
-        sword.GetComponent<BoxCollider>().enabled = !sword.GetComponent<BoxCollider>().enabled;
+        _sword.GetComponent<BoxCollider>().enabled = !_sword.GetComponent<BoxCollider>().enabled;
     }
 
     public void TogglePunchCollision()
     {
-        punch.GetComponent<BoxCollider>().enabled = !punch.GetComponent<BoxCollider>().enabled;
+        _punch.GetComponent<BoxCollider>().enabled = !_punch.GetComponent<BoxCollider>().enabled;
     }
     #endregion
 
     #region Status Check
     public bool IsAttacking()
     {
-        return attacking;
+        return _attacking;
     }
 
     public bool GetSwordToggle()
     {
-        return swordOn;
+        return _swordOn;
     }
     #endregion
 
     #region Getters
     public int GetPunchPower()
     {
-        return punchPower;
+        return _punchPower;
     }
 
     public int GetSwordPower()
     {
-        return swordPower;
+        return _swordPower;
     }
 
     public int GetMagicPower()
     {
-        return magicPower;
+        return _magicPower;
     }
 
     #endregion

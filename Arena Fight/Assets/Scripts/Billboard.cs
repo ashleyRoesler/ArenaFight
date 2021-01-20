@@ -3,14 +3,14 @@ using MLAPI;
 
 public class Billboard : NetworkedBehaviour
 {
-    private static Transform localCam;      
+    private static Transform _localCam;      
 
     private void Start()
     {
         if (IsLocalPlayer)
         {
             // get the local player's camera transform
-            localCam = gameObject.transform.parent.gameObject.GetComponent<PlayerController>().GetCamTransform();
+            _localCam = gameObject.transform.parent.gameObject.GetComponent<PlayerController>().GetCamTransform();
 
         }
     }
@@ -18,6 +18,6 @@ public class Billboard : NetworkedBehaviour
     void LateUpdate()
     {
         // point the billboard at the camera
-        transform.LookAt(transform.position + localCam.forward);
+        transform.LookAt(transform.position + _localCam.forward);
     }
 }

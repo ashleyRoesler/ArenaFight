@@ -4,17 +4,17 @@ using MLAPI.Messaging;
 
 public class Attack : NetworkedBehaviour
 {
-    private bool hasCollide = false;
-    protected AttackController player;
-    protected int attackPower = 0;
+    private bool _hasCollide = false;
+    private AttackController _player;
+    private int _attackPower = 0;
 
     private void OnTriggerEnter(Collider other)
     {
         // damage player
-        if (player.IsAttacking() && !hasCollide && !hasCollide && other.gameObject != player.gameObject && other.gameObject.CompareTag("Player"))
+        if (_player.IsAttacking() && !_hasCollide && !_hasCollide && other.gameObject != _player.gameObject && other.gameObject.CompareTag("Player"))
         {
             // prevent double collisions
-            hasCollide = true;
+            _hasCollide = true;
 
             // get the PlayerCam object (have to use a NetworkedObject)
             GameObject pcVictim = other.transform.parent.gameObject;
@@ -38,7 +38,7 @@ public class Attack : NetworkedBehaviour
 
     private void ApplyDamage(GameObject victim)
     {
-        victim.GetComponentInChildren<Health>().TakeDamage(attackPower);
+        victim.GetComponentInChildren<Health>().TakeDamage(_attackPower);
     }
 
     [ServerRPC]
@@ -55,16 +55,16 @@ public class Attack : NetworkedBehaviour
 
     public void ResetCollide()
     {
-        hasCollide = false;
+        _hasCollide = false;
     }
 
     public void SetPlayer(AttackController P)
     {
-        player = P;
+        _player = P;
     }
 
     public void SetPower(int P)
     {
-        attackPower = P;
+        _attackPower = P;
     }
 }

@@ -4,30 +4,30 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField]
-    private Slider slider;
+    private Slider _slider;
 
     [SerializeField]
-    private Image fill;
+    private Image _fill;
 
     [SerializeField]
-    private Gradient gradient;
+    private Gradient _gradient;
 
     public void SetMaxHealth(int health)
     {
         // set health
-        slider.maxValue = health;
-        slider.value = health;
+        _slider.maxValue = health;
+        _slider.value = health;
 
         // change color
-        fill.color = gradient.Evaluate(1f);
+        _fill.color = _gradient.Evaluate(1f);
     }
 
     public void SetHealth(int health)
     {
         // set health
-        slider.value = health;
+        _slider.value = health;
 
         // change color
-        fill.color = gradient.Evaluate(slider.normalizedValue);
+        _fill.color = _gradient.Evaluate(_slider.normalizedValue);
     }
 }
