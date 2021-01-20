@@ -13,17 +13,17 @@ public class ArenaManager : NetworkedBehaviour
     private List<GameObject> spawnAreas;                            // list of player spawn areas
     
     [Header("Required Player Count")]
-    public int requiredPlayerCount = 3;                             // number of players needed to start the game
+    public int requiredPlayerCount = 3;                             
 
     [SerializeField]
-    private GameObject victoryCanvas;                               // reference to victory screen
+    private GameObject victoryCanvas;                               
 
     public static int numAlive = 0;                                 // number of players left alive
 
     private bool gameOver = false;                                  // true if only one player is left
     public static bool gameHasStarted = false;                      // true if number of players equals the required amount
 
-    public delegate void UpdateWait(int current, int needed);       // used to update the waiting counter text
+    public delegate void UpdateWait(int current, int needed);       
     public static event UpdateWait OnUpdateWait;
 
     #region Pre-Game Networking

@@ -4,13 +4,13 @@ using MLAPI;
 public class Health : NetworkedBehaviour
 {
     [SerializeField]
-    private PlayerController player;    // player reference
+    private PlayerController player;    
     [SerializeField]
-    private HealthBar healthBar;        // health bar reference
+    private HealthBar healthBar;        
 
     [SerializeField]
     private int maxHealth = 100;
-    private int currentHealth;          // player's current health
+    private int currentHealth;          
 
     private bool dead = false;          // true if current health reaches 0
 

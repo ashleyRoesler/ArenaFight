@@ -5,22 +5,22 @@ public class PlayerController : NetworkedBehaviour
 {
     [Header("References")]
     [SerializeField]
-    private GameObject localCam;                                // player camera reference
+    private GameObject localCam;                               
     [SerializeField]
     private Transform lookAt;                                   // player camera's focus
 
-    private CharacterController controller;                     // player controller reference
+    private CharacterController controller;                     
 
     [HideInInspector]
-    public Health HP;                                           // player's health information
+    public Health HP;                                           
 
     [HideInInspector]
-    public Animator anim;                                       // animator reference
+    public Animator anim;                                      
 
     [HideInInspector]
-    public AttackController attack;                                       // player's attack information
+    public AttackController attack;                                       
 
-    private float turnSmoothVelocity;                           // current smooth velocity
+    private float turnSmoothVelocity;                           
 
     [Header("Movement Stats")]
 

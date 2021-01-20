@@ -3,7 +3,7 @@ using MLAPI;
 
 public class Billboard : NetworkedBehaviour
 {
-    private static Transform localCam;      // reference to local camera transform
+    private static Transform localCam;      
 
     private void Start()
     {

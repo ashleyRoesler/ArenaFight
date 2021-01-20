@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class MainMenu : NetworkedBehaviour
 {
-    public delegate void RestartCallback();
+    public delegate void RestartCallback();         
     public static event RestartCallback OnRestartCallback;
 
     public void ReplayGame()
