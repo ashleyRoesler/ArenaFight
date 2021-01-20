@@ -7,13 +7,12 @@ using TMPro;
 
 public class ArenaManager : NetworkedBehaviour
 {
-    private static bool _isGameHost = false;                         // true if local player is game host
+    private static bool _isGameHost = false;                        // true if local player is game host
 
-    private List<PlayerController> _players;                         // list of current players
-    private List<GameObject> _spawnAreas;                            // list of player spawn areas
+    private List<PlayerController> _players;                        // list of current players
+    private List<GameObject> _spawnAreas;                           // list of player spawn areas
     
-    [Header("Required Player Count")]
-    public int RequiredPlayerCount = 3;                             
+    private static int _requiredPlayerCount;                             
 
     [SerializeField]
     private GameObject _victoryCanvas;                               
@@ -27,9 +26,10 @@ public class ArenaManager : NetworkedBehaviour
     public static event UpdateWait OnUpdateWait;
 
     #region Pre-Game Networking
-    public static void BeHost(bool yes)
+    public static void BeHost(bool yes, int PC)
     {
         _isGameHost = yes;
+        _requiredPlayerCount = PC;
     }
 
     private void StartHost()
@@ -58,7 +58,7 @@ public class ArenaManager : NetworkedBehaviour
 
         // if players are still needed, accept the connection
         // note: numAlive starts at 1 because the host has already spawned
-        if (NumAlive < RequiredPlayerCount && !GameHasStarted)
+        if (NumAlive < _requiredPlayerCount && !GameHasStarted)
         {
             approve = true;
             createPlayerObject = true;
@@ -135,7 +135,7 @@ public class ArenaManager : NetworkedBehaviour
         NumAlive++;
 
         // update waiting text (waiting script starts game)
-        OnUpdateWait?.Invoke(NumAlive, RequiredPlayerCount);
+        OnUpdateWait?.Invoke(NumAlive, _requiredPlayerCount);
     }
 
     #endregion

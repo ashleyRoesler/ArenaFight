@@ -1,17 +1,18 @@
 ﻿using UnityEngine.SceneManagement;
 using MLAPI;
+using UnityEngine;
 
 public class StartManager : NetworkedBehaviour
 {
-    public void HostGame()
+    public void HostGame(int PC)
     {
         SceneManager.LoadScene("Arena");
-        ArenaManager.BeHost(true);
+        ArenaManager.BeHost(true, PC);
     }
 
-    public void JoinGame()
+    public void JoinGame(int PC)
     {
         SceneManager.LoadScene("Arena");
-        ArenaManager.BeHost(false);
+        ArenaManager.BeHost(false, PC);
     }
 }
