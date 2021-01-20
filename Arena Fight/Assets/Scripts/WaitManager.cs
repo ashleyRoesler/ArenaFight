@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class Waiting : MonoBehaviour
+public class WaitManager : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI waitingText;        // waiting for players/countdown timer text

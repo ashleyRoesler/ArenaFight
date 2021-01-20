@@ -7943,7 +7943,6 @@ GameObject:
   m_Component:
   - component: {fileID: 405389331}
   - component: {fileID: 405389332}
-  - component: {fileID: 405389333}
   - component: {fileID: 405389334}
   m_Layer: 0
   m_Name: Arena Manager
@@ -7980,28 +7979,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredPlayerCount: 3
   victoryCanvas: {fileID: 640987861}
---- !u!114 &405389333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405389330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba38ece47de66cd448dde9c7c9693283, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6
-  turnSmoothTime: 0.1
-  maxHealth: 100
-  punchPower: 10
-  swordPower: 20
-  magicPower: 30
-  punchSpeed: 2.4
-  swordSpeed: 1.2
-  magicSpeed: 1.5
-  projectileSpeed: 12
 --- !u!114 &405389334
 MonoBehaviour:
   m_ObjectHideFlags: 0

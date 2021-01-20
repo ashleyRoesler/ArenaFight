@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 372765846}
   - component: {fileID: 372765847}
-  - component: {fileID: 372765848}
+  - component: {fileID: 6363568397743185276}
   - component: {fileID: 1848568459978573106}
   m_Layer: 9
   m_Name: Punch Volume
@@ -46,7 +46,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9405384, y: 0.96302056, z: 0.48796272}
   m_Center: {x: 0.00074481964, y: 0.2958001, z: -0.25601864}
---- !u!114 &372765848
+--- !u!114 &6363568397743185276
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,10 +55,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 372765845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f730960af70e8b4198d30a505c248f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f9ddb8468fee7440a369c4d4ab1ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1495132888529152229}
 --- !u!114 &1848568459978573106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,6 +631,8 @@ MonoBehaviour:
   HP: {fileID: 1495132888529152230}
   anim: {fileID: 1495132888529152228}
   attack: {fileID: 1495132888529152229}
+  speed: 6
+  turnSmoothTime: 0.1
 --- !u!114 &1495132888529152230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,9 +660,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1495132888529152225}
-  sword: {fileID: 1765040110738706155}
+  sword: {fileID: 4473579461673747058}
   hand: {fileID: 4457155198409230917}
-  punch: {fileID: 372765845}
+  punch: {fileID: 6363568397743185276}
+  punchPower: 10
+  swordPower: 20
+  magicPower: 15
+  punchSpeed: 1
+  swordSpeed: 1
+  magicSpeed: 1
+  projectileSpeed: 50
 --- !u!114 &9134564819671458942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1445,6 +1453,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5409878005eebb4dbc6a3f2f347e57d, type: 3}
+--- !u!114 &4473579461673747058 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5101309889098439104, guid: c5409878005eebb4dbc6a3f2f347e57d,
+    type: 3}
+  m_PrefabInstance: {fileID: 8709441067212757938}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765040110738706155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9ddb8468fee7440a369c4d4ab1ae4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1765040110738706155 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6962714697175913817, guid: c5409878005eebb4dbc6a3f2f347e57d,

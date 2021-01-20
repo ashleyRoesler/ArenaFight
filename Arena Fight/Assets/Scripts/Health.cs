@@ -8,6 +8,8 @@ public class Health : NetworkedBehaviour
     [SerializeField]
     private HealthBar healthBar;        // health bar reference
 
+    [SerializeField]
+    private int maxHealth = 100;
     private int currentHealth;          // player's current health
 
     private bool dead = false;          // true if current health reaches 0
@@ -15,7 +17,7 @@ public class Health : NetworkedBehaviour
     #region Initialization and Misc.
     void Start()
     {
-        currentHealth = Stats.instance.maxHealth;
+        currentHealth = maxHealth;
         healthBar.SetMaxHealth(currentHealth);
     }
 

@@ -18,9 +18,16 @@ public class PlayerController : NetworkedBehaviour
     public Animator anim;                                       // animator reference
 
     [HideInInspector]
-    public Attack attack;                                       // player's attack information
+    public AttackController attack;                                       // player's attack information
 
     private float turnSmoothVelocity;                           // current smooth velocity
+
+    [Header("Movement Stats")]
+
+    [SerializeField]
+    private float speed = 6f;
+    [SerializeField]
+    private float turnSmoothTime = 0.1f;
 
     public delegate void JoinGame(PlayerController player);     // used to add player to arena manager
     public static event JoinGame OnJoin;
@@ -35,7 +42,7 @@ public class PlayerController : NetworkedBehaviour
         anim = gameObject.GetComponent<Animator>();
         controller = gameObject.GetComponent<CharacterController>();
         HP = gameObject.GetComponent<Health>();
-        attack = gameObject.GetComponent<Attack>();
+        attack = gameObject.GetComponent<AttackController>();
 
         // turn off camera and component control for non-local players
         if (!IsLocalPlayer)
@@ -67,12 +74,12 @@ public class PlayerController : NetworkedBehaviour
 
             // rotate player to make them look where they are going (based on camera rotation as well)
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + localCam.transform.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, Stats.instance.turnSmoothTime);
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             // move player based on input and camera rotation
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * Stats.instance.speed * Time.deltaTime);
+            controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
         else
         {

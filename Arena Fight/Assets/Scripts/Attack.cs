@@ -4,189 +4,67 @@ using MLAPI.Messaging;
 
 public class Attack : NetworkedBehaviour
 {
-    [Header("References")]
-    [SerializeField]
-    private PlayerController player;    // player reference
-    [SerializeField]
-    private GameObject sword;           // player's sword
-    [SerializeField]
-    private GameObject hand;            // player's hand, used for firing projectile
-    [SerializeField]
-    private GameObject punch;           // player's punch volume
+    private bool hasCollide = false;
+    protected AttackController player;
+    protected int attackPower = 0;
 
-    private GameObject projectile;      // magic projectile
-
-    private int attackId = 0;           // type of attack (punch or sword)
-
-    private bool attacking = false;     // false if attack animation is not playing
-
-    private bool swordOn = false;       // true if sword drawn
-
-    #region Initialization
-    private void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        // set attack speeds
-        player.anim.SetFloat("Punch Speed", Stats.instance.punchSpeed);
-        player.anim.SetFloat("Sword Speed", Stats.instance.swordSpeed);
-        player.anim.SetFloat("Magic Speed", Stats.instance.magicSpeed);
-
-        // get magic projectile
-        projectile = Resources.Load("magic projectile") as GameObject;
-    }
-    #endregion
-
-    #region Do Attack
-    void Update()
-    {
-        // don't attack if you are already attacking, not the local player, or if the game hasn't started
-        if (attacking || !IsLocalPlayer || !ArenaManager.gameHasStarted)
+        // damage player
+        if (player.IsAttacking() && !hasCollide && !hasCollide && other.gameObject != player.gameObject && other.gameObject.CompareTag("Player"))
         {
-            return;
-        }
+            // prevent double collisions
+            hasCollide = true;
 
-        // sheath/draw sword
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ToggleSword(!swordOn);
+            // get the PlayerCam object (have to use a NetworkedObject)
+            GameObject pcVictim = other.transform.parent.gameObject;
 
-            // make sure sword is toggled across both host and clients
+            // make sure both client and host receive health update
             if (IsHost)
             {
                 // apply client side
-                InvokeClientRpcOnEveryone(SendToggleToClient, swordOn);
+                InvokeClientRpcOnEveryone(SendDamageToClient, pcVictim);
             }
             else
             {
+                // apply client side
+                ApplyDamage(pcVictim);
+
                 // apply host side
-                InvokeServerRpc(SendToggleToHost, swordOn);
+                InvokeServerRpc(SendDamageToHost, pcVictim);
             }
         }
-
-        // punch or swing sword
-        if (Input.GetMouseButtonDown(0) && !attacking)
-        {
-            // set attacking to true
-            player.anim.SetBool("Attacking", true);
-            attacking = true;
-
-            // set animation and attack type
-            player.anim.SetInteger("Attack Type", attackId);
-
-            // switch punches or reset sword
-            switch (attackId)
-            {
-                case 0:
-                    attackId = 1;
-                    punch.GetComponent<Melee>().ResetCollide();
-                    break;
-                case 1:
-                    attackId = 0;
-                    punch.GetComponent<Melee>().ResetCollide();
-                    break;
-                case 2:
-                    sword.GetComponent<Melee>().ResetCollide();
-                    break;
-            }
-        }
-
-        // fire magic
-        if (Input.GetKeyDown(KeyCode.Q) && !attacking)
-        {
-            // set attacking to true
-            player.anim.SetBool("Attacking", true);
-            attacking = true;
-
-            // set animation
-            player.anim.SetInteger("Attack Type", 3);
-        }
     }
 
-    public void FireMagic()
+    private void ApplyDamage(GameObject victim)
     {
-        if (IsHost)
-        {
-            // spawn magic projectile
-            GameObject magic = Instantiate(projectile, hand.transform.position, Quaternion.identity) as GameObject;
-            magic.GetComponent<NetworkedObject>().Spawn();
-
-            // fire projectile
-            Rigidbody rb = magic.GetComponent<Rigidbody>();
-            rb.AddForce(player.transform.forward * Stats.instance.projectileSpeed, ForceMode.Force);
-        }
-    }
-    #endregion
-
-    #region Toggle Attack
-    public void EndAttack()
-    {
-        // turn animation and attacking off
-        attacking = false;
-        player.anim.SetBool("Attacking", false);
-
-        // only turn off attack collision for melee, not magic
-        if (player.anim.GetInteger("Attack Type") == 3)
-        {
-            return;
-        }
-
-        // turn attack collision off
-        if (attackId < 2)
-        {
-            TogglePunchCollision();
-        }
-        else if (attackId == 2)
-        {
-            ToggleSwordCollision();
-        }
-    }
-
-    public void ToggleSword(bool onf)
-    {
-        sword.SetActive(onf);
-        swordOn = onf;
-
-        if (onf)    // turn sword on
-        {
-            attackId = 2;
-        }
-        else       // turn sword off
-        {
-            attackId = 0;
-        }
+        victim.GetComponentInChildren<Health>().TakeDamage(attackPower);
     }
 
     [ServerRPC]
-    private void SendToggleToHost(bool onf)
+    private void SendDamageToHost(GameObject victim)
     {
-        ToggleSword(onf);
+        ApplyDamage(victim);
     }
 
     [ClientRPC]
-    private void SendToggleToClient(bool onf)
+    private void SendDamageToClient(GameObject victim)
     {
-        ToggleSword(onf);
+        ApplyDamage(victim);
     }
 
-    public void ToggleSwordCollision()
+    public void ResetCollide()
     {
-        sword.GetComponent<BoxCollider>().enabled = !sword.GetComponent<BoxCollider>().enabled;
+        hasCollide = false;
     }
 
-    public void TogglePunchCollision()
+    public void SetPlayer(AttackController P)
     {
-        punch.GetComponent<BoxCollider>().enabled = !punch.GetComponent<BoxCollider>().enabled;
-    }
-    #endregion
-
-    #region Status Check
-    public bool IsAttacking()
-    {
-        return attacking;
+        player = P;
     }
 
-    public bool GetSwordToggle()
+    public void SetPower(int P)
     {
-        return swordOn;
+        attackPower = P;
     }
-    #endregion
 }

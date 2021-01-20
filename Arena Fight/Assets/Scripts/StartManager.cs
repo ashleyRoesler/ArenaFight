@@ -1,7 +1,7 @@
 ﻿using UnityEngine.SceneManagement;
 using MLAPI;
 
-public class StartGameManager : NetworkedBehaviour
+public class StartManager : NetworkedBehaviour
 {
     public void HostGame()
     {
