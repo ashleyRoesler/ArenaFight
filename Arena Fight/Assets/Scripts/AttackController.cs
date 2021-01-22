@@ -10,7 +10,7 @@ public class AttackController : NetworkedBehaviour
     [SerializeField]
     private Attack _sword;           
     [SerializeField]
-    private GameObject _hand;            // player's hand, used for firing projectile
+    private GameObject _hand;            // player's left hand, used for firing projectile
     [SerializeField]
     private Attack _punch;          
 
@@ -116,7 +116,7 @@ public class AttackController : NetworkedBehaviour
 
             // fire projectile
             Rigidbody rb = magic.GetComponent<Rigidbody>();
-            rb.AddForce(_player.transform.forward * _magic.Skill.ProjectileSpeed, ForceMode.Force);
+            rb.AddForce(_player.transform.forward * magic.Skill.ProjectileSpeed, ForceMode.Force);
         }
     }
     #endregion

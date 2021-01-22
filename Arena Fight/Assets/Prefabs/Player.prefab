@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9ddb8468fee7440a369c4d4ab1ae4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Skill: {fileID: 11400000, guid: 3729772e42f5ab3489863ce08411a235, type: 2}
 --- !u!114 &1848568459978573106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,13 +665,6 @@ MonoBehaviour:
   _sword: {fileID: 4473579461673747058}
   _hand: {fileID: 4457155198409230917}
   _punch: {fileID: 6363568397743185276}
-  _punchPower: 10
-  _swordPower: 20
-  _magicPower: 15
-  _punchSpeed: 1
-  _swordSpeed: 1
-  _magicSpeed: 1
-  _projectileSpeed: 50
 --- !u!114 &9134564819671458942
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 030bc3c09e604df408d741c50ee280b9, type: 3}
-  m_Name: Punch
+  m_Script: {fileID: 11500000, guid: f82fa72323b09b94981c7c971fe24c22, type: 3}
+  m_Name: Magic
   m_EditorClassIdentifier: 
-  name: Punch
-  Description: punch punch
-  Power: 10
-  Speed: 2.4
+  Power: 30
+  Speed: 1.5
+  ProjectileSpeed: 12
