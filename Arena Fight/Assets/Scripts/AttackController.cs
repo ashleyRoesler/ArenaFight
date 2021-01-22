@@ -14,7 +14,7 @@ public class AttackController : NetworkedBehaviour
     [SerializeField]
     private Attack _punch;          
 
-    private Attack _projectile;      
+    private Attack _magic;      
 
     private int _attackId = 0;           // type of attack (punch or sword)
 
@@ -22,41 +22,20 @@ public class AttackController : NetworkedBehaviour
 
     private bool _swordOn = false;       // true if sword drawn
 
-    [Header("Damage Values")]
-    [SerializeField]
-    private int _punchPower = 10;        // punch hp damage
-    [SerializeField]
-    private int _swordPower = 20;        // sword hp damage
-    [SerializeField]
-    private int _magicPower = 15;        // magic hp damage
-
-    [Header("Attack Speeds")]
-    [SerializeField]
-    private float _punchSpeed = 1.0f;             // punch animation speed
-    [SerializeField]
-    private float _swordSpeed = 1.0f;             // sword animation speed
-    [SerializeField]
-    private float _magicSpeed = 1.0f;             // magic animation speed
-    [SerializeField]
-    private float _projectileSpeed = 50.0f;       // magic projectile speed
-
-
     #region Initialization
     private void Start()
     {
         // set attack speeds
-        _player.anim.SetFloat("Punch Speed", _punchSpeed);
-        _player.anim.SetFloat("Sword Speed", _swordSpeed);
-        _player.anim.SetFloat("Magic Speed", _magicSpeed);
+        _player.anim.SetFloat("Punch Speed", _punch.Skill.Speed);
+        _player.anim.SetFloat("Sword Speed", _sword.Skill.Speed);
+        _player.anim.SetFloat("Magic Speed", _magic.Skill.Speed);
 
-        // set melee values
+        // set melee players
         _sword.SetPlayer(this);
-        _sword.SetPower(_swordPower);
         _punch.SetPlayer(this);
-        _punch.SetPower(_punchPower);
 
         // get magic projectile
-        _projectile = Resources.Load("magic projectile") as Attack;
+        _magic = Resources.Load("magic projectile") as Attack;
     }
     #endregion
 
@@ -131,14 +110,13 @@ public class AttackController : NetworkedBehaviour
         if (IsHost)
         {
             // spawn magic projectile
-            Attack magic = Instantiate(_projectile, _hand.transform.position, Quaternion.identity) as Attack;
+            Attack magic = Instantiate(_magic, _hand.transform.position, Quaternion.identity) as Attack;
             magic.GetComponent<NetworkedObject>().Spawn();
             magic.SetPlayer(this);
-            magic.SetPower(_magicPower);
 
             // fire projectile
             Rigidbody rb = magic.GetComponent<Rigidbody>();
-            rb.AddForce(_player.transform.forward * _projectileSpeed, ForceMode.Force);
+            rb.AddForce(_player.transform.forward * _magic.Skill.ProjectileSpeed, ForceMode.Force);
         }
     }
     #endregion
@@ -215,23 +193,5 @@ public class AttackController : NetworkedBehaviour
     {
         return _swordOn;
     }
-    #endregion
-
-    #region Getters
-    public int GetPunchPower()
-    {
-        return _punchPower;
-    }
-
-    public int GetSwordPower()
-    {
-        return _swordPower;
-    }
-
-    public int GetMagicPower()
-    {
-        return _magicPower;
-    }
-
     #endregion
 }

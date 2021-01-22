@@ -4,10 +4,12 @@ using MLAPI.Messaging;
 
 public class Attack : NetworkedBehaviour
 {
+    public Skill Skill;
+
     private bool _hasCollide = false;
     private AttackController _player;
-    private int _attackPower = 0;
 
+    #region Hit Target
     private void OnTriggerEnter(Collider other)
     {
         // damage player
@@ -35,10 +37,12 @@ public class Attack : NetworkedBehaviour
             }
         }
     }
+    #endregion
 
+    #region Apply Damage
     private void ApplyDamage(GameObject victim)
     {
-        victim.GetComponentInChildren<Health>().TakeDamage(_attackPower);
+        victim.GetComponentInChildren<Health>().TakeDamage(Skill.Power);
     }
 
     [ServerRPC]
@@ -52,7 +56,9 @@ public class Attack : NetworkedBehaviour
     {
         ApplyDamage(victim);
     }
+    #endregion
 
+    #region Misc.
     public void ResetCollide()
     {
         _hasCollide = false;
@@ -62,9 +68,5 @@ public class Attack : NetworkedBehaviour
     {
         _player = P;
     }
-
-    public void SetPower(int P)
-    {
-        _attackPower = P;
-    }
+    #endregion
 }
