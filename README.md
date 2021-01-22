@@ -14,4 +14,4 @@ I have included a build that works on one Windows machine. However, it is possib
  
 **About Running the Project in Unity:**
 
-If you wish to run the game in the Unity Editor, make sure you start in the Menu scene. Otherwise, it won't run properly. Also, a side note: someone playing in the editor can connect to someone playing the build. Also, you can change the number of players by going into the Arena scene and looking at the Arena Manager. There's a variable that lets you set the number of players required to play the game. However, since I built the arena for three players, if you try to add more players, it won't work unless you add more spawn locations (these must have the "Spawn" tag).
+If you wish to run the game in the Unity Editor, make sure you start in the Menu scene. Otherwise, it won't run properly. Also, a side note: someone playing in the editor can connect to someone playing the build.
