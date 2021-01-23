@@ -14,7 +14,8 @@ public class AttackController : NetworkedBehaviour
     [SerializeField]
     private Attack _punch;          
 
-    private Attack _magic;      
+    private GameObject _magic;
+    private bool _magicSet = false;      // true if player has fired at least one magic projectile
 
     private int _attackId = 0;           // type of attack (punch or sword)
 
@@ -28,14 +29,13 @@ public class AttackController : NetworkedBehaviour
         // set attack speeds
         _player.anim.SetFloat("Punch Speed", _punch.Skill.Speed);
         _player.anim.SetFloat("Sword Speed", _sword.Skill.Speed);
-        _player.anim.SetFloat("Magic Speed", _magic.Skill.Speed);
 
         // set melee players
         _sword.SetPlayer(this);
         _punch.SetPlayer(this);
 
         // get magic projectile
-        _magic = Resources.Load("magic projectile") as Attack;
+        _magic = Resources.Load("magic projectile") as GameObject;
     }
     #endregion
 
@@ -110,13 +110,20 @@ public class AttackController : NetworkedBehaviour
         if (IsHost)
         {
             // spawn magic projectile
-            Attack magic = Instantiate(_magic, _hand.transform.position, Quaternion.identity) as Attack;
+            GameObject magic = Instantiate(_magic, _hand.transform.position, Quaternion.identity) as GameObject;
             magic.GetComponent<NetworkedObject>().Spawn();
-            magic.SetPlayer(this);
+            magic.GetComponent<Attack>().SetPlayer(this);
+
+            // set animation speed if this is the first projectile
+            // note: this is very dumb but I don't know how else to fix it
+            if (!_magicSet)
+            {
+                _player.anim.SetFloat("Magic Speed", magic.GetComponent<Attack>().Skill.Speed);
+            }
 
             // fire projectile
             Rigidbody rb = magic.GetComponent<Rigidbody>();
-            rb.AddForce(_player.transform.forward * magic.Skill.ProjectileSpeed, ForceMode.Force);
+            rb.AddForce(_player.transform.forward * magic.GetComponent<Attack>().Skill.ProjectileSpeed, ForceMode.Force);
         }
     }
     #endregion
