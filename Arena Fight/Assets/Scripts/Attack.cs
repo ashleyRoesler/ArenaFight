@@ -4,7 +4,7 @@ using MLAPI.Messaging;
 
 public class Attack : NetworkedBehaviour
 {
-    public Skill Skill;
+    public Skill_Base Skill;
 
     private bool _hasCollide = false;
     private AttackController _player;

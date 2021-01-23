@@ -15,7 +15,7 @@ public class AttackController : NetworkedBehaviour
     private Attack _punch;          
 
     private GameObject _magic;
-    private Skill _magicStats;
+    private Skill_Base _magicStats;
 
     private int _attackId = 0;           // type of attack (punch or sword)
 
@@ -116,7 +116,7 @@ public class AttackController : NetworkedBehaviour
 
             // fire projectile
             Rigidbody rb = magic.GetComponent<Rigidbody>();
-            rb.AddForce(_player.transform.forward * magic.GetComponent<Attack>().Skill.ProjectileSpeed, ForceMode.Force);
+          //  rb.AddForce(_player.transform.forward * magic.GetComponent<Attack>()..ProjectileSpeed, ForceMode.Force);
         }
     }
     #endregion
