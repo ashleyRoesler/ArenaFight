@@ -1,6 +1,6 @@
 # Arena Fight!
 
-This is a small practice project I made to learn how to create an MLAPI multiplayer game in Unity. It is a 3-player, local multiplayer game. Each player controls one fighter in the arena, and last one standing wins! (More information about controls can be found in the game's main menu.)
+This is a small practice project I made to learn how to create an MLAPI multiplayer game in Unity. It is a 2 to 3-player, local multiplayer game. Each player controls one fighter in the arena, and last one standing wins! (More information about controls can be found in the game's main menu.)
 
 **About Building for Local Networks:**
 
@@ -14,4 +14,4 @@ I have included a build that works on one Windows machine. However, it is possib
  
 **About Running the Project in Unity:**
 
-If you wish to run the game in the Unity Editor, make sure you start in the Menu scene. Otherwise, it won't run properly. Also, a side note: someone playing in the editor can connect to someone playing the build. Also, you can change the number of players by going into the Arena scene and looking at the Arena Manager. There's a variable that lets you set the number of players required to play the game. However, since I built the arena for three players, if you try to add more players, it won't work unless you add more spawn locations (these must have the "Spawn" tag).
+If you wish to run the game in the Unity Editor, make sure you start in the Menu scene. Otherwise, it won't run properly. Also, a side note: someone playing in the editor can connect to someone playing the build.
