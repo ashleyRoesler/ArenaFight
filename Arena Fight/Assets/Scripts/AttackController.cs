@@ -15,7 +15,7 @@ public class AttackController : NetworkedBehaviour
     private Attack _punch;          
 
     private GameObject _magic;
-    private bool _magicSet = false;      // true if player has fired at least one magic projectile
+    private Skill _magicStats;
 
     private int _attackId = 0;           // type of attack (punch or sword)
 
