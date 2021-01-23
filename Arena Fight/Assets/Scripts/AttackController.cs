@@ -114,13 +114,6 @@ public class AttackController : NetworkedBehaviour
             magic.GetComponent<NetworkedObject>().Spawn();
             magic.GetComponent<Attack>().SetPlayer(this);
 
-            // set animation speed if this is the first projectile
-            // note: this is very dumb but I don't know how else to fix it
-            if (!_magicSet)
-            {
-                _player.anim.SetFloat("Magic Speed", magic.GetComponent<Attack>().Skill.Speed);
-            }
-
             // fire projectile
             Rigidbody rb = magic.GetComponent<Rigidbody>();
             rb.AddForce(_player.transform.forward * magic.GetComponent<Attack>().Skill.ProjectileSpeed, ForceMode.Force);
