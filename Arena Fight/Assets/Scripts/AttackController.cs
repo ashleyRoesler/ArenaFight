@@ -30,10 +30,9 @@ public class AttackController : NetworkedBehaviour
         _player.anim.SetFloat("Sword Speed", _sword.Skill.Speed);
         _player.anim.SetFloat("Magic Speed", _magic.Skill.Speed);
 
-        // set players
+        // set melee player
         _sword.SetPlayer(this);
         _punch.SetPlayer(this);
-        _magic.SetPlayer(this);
     }
     #endregion
 
