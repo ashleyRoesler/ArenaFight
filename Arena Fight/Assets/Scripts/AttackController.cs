@@ -13,9 +13,8 @@ public class AttackController : NetworkedBehaviour
     private GameObject _hand;            // player's left hand, used for firing projectile
     [SerializeField]
     private Attack _punch;          
-
-    private GameObject _magic;
-    private Skill_Base _magicStats;
+    [SerializeField]
+    private Attack _magic;
 
     private int _attackId = 0;           // type of attack (punch or sword)
 
@@ -29,13 +28,12 @@ public class AttackController : NetworkedBehaviour
         // set attack speeds
         _player.anim.SetFloat("Punch Speed", _punch.Skill.Speed);
         _player.anim.SetFloat("Sword Speed", _sword.Skill.Speed);
+        _player.anim.SetFloat("Magic Speed", _magic.Skill.Speed);
 
-        // set melee players
+        // set players
         _sword.SetPlayer(this);
         _punch.SetPlayer(this);
-
-        // get magic projectile
-        _magic = Resources.Load("magic projectile") as GameObject;
+        _magic.SetPlayer(this);
     }
     #endregion
 
@@ -110,13 +108,12 @@ public class AttackController : NetworkedBehaviour
         if (IsHost)
         {
             // spawn magic projectile
-            GameObject magic = Instantiate(_magic, _hand.transform.position, Quaternion.identity) as GameObject;
+            GameObject magic = Instantiate(_magic.gameObject, _hand.transform.position, Quaternion.identity) as GameObject;
             magic.GetComponent<NetworkedObject>().Spawn();
-            magic.GetComponent<Attack>().SetPlayer(this);
 
             // fire projectile
             Rigidbody rb = magic.GetComponent<Rigidbody>();
-          //  rb.AddForce(_player.transform.forward * magic.GetComponent<Attack>()..ProjectileSpeed, ForceMode.Force);
+            rb.AddForce(_player.transform.forward * ((Skill_Projectile)_magic.Skill).ProjectileSpeed, ForceMode.Force);
         }
     }
     #endregion

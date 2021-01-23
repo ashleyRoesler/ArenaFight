@@ -665,6 +665,7 @@ MonoBehaviour:
   _sword: {fileID: 4473579461673747058}
   _hand: {fileID: 4457155198409230917}
   _punch: {fileID: 6363568397743185276}
+  _magic: {fileID: 7122401777103688410, guid: fe52a90ec2c077846a1a4bf3b6b8c323, type: 3}
 --- !u!114 &9134564819671458942
 MonoBehaviour:
   m_ObjectHideFlags: 0
