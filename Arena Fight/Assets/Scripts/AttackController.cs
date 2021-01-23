@@ -110,6 +110,7 @@ public class AttackController : NetworkedBehaviour
             // spawn magic projectile
             GameObject magic = Instantiate(_magic.gameObject, _hand.transform.position, Quaternion.identity) as GameObject;
             magic.GetComponent<NetworkedObject>().Spawn();
+            magic.GetComponent<Attack>().SetPlayer(this);
 
             // fire projectile
             Rigidbody rb = magic.GetComponent<Rigidbody>();

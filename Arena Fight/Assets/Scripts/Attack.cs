@@ -13,7 +13,7 @@ public class Attack : NetworkedBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // damage player
-        if (_player.IsAttacking() && !_hasCollide && !_hasCollide && other.gameObject != _player.gameObject && other.gameObject.CompareTag("Player"))
+        if (_player.IsAttacking() && !_hasCollide && other.gameObject != _player.gameObject && other.gameObject.CompareTag("Player"))
         {
             // prevent double collisions
             _hasCollide = true;
