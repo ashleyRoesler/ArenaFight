@@ -4,9 +4,9 @@ using MLAPI.Messaging;
 
 public class Attack : NetworkedBehaviour
 {
-    public Skill_Base Skill;
+    public Skill Skill;
 
-    private bool _hasCollide = false;
+    protected bool _hasCollide = false;
     private AttackController _player;
 
     #region Hit Target
@@ -52,7 +52,7 @@ public class Attack : NetworkedBehaviour
     }
 
     [ClientRPC]
-    private void SendDamageToClient(GameObject victim)
+    protected void SendDamageToClient(GameObject victim)
     {
         ApplyDamage(victim);
     }

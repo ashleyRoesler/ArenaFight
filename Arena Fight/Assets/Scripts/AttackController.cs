@@ -33,6 +33,7 @@ public class AttackController : NetworkedBehaviour
         // set melee player
         _sword.SetPlayer(this);
         _punch.SetPlayer(this);
+        _magic.SetPlayer(this);
     }
     #endregion
 
@@ -109,11 +110,10 @@ public class AttackController : NetworkedBehaviour
             // spawn magic projectile
             GameObject magic = Instantiate(_magic.gameObject, _hand.transform.position, Quaternion.identity) as GameObject;
             magic.GetComponent<NetworkedObject>().Spawn();
-            magic.GetComponent<Attack>().SetPlayer(this);
 
             // fire projectile
             Rigidbody rb = magic.GetComponent<Rigidbody>();
-            rb.AddForce(_player.transform.forward * ((Skill_Projectile)_magic.Skill).ProjectileSpeed, ForceMode.Force);
+            rb.AddForce(_player.transform.forward * ((RangedSkill)_magic.Skill).ProjectileSpeed, ForceMode.Force);
         }
     }
     #endregion
